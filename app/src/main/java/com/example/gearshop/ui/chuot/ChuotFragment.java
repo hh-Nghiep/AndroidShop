@@ -87,4 +87,5 @@ public class ChuotFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
     }
+
 }
