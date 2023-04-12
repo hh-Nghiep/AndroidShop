@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.chuot.ChuotFragment"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvCorsair"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Corsair"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:textStyle="bold"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDanhSachSPCorsair"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tvThuongHieuDareu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dare-u"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:textStyle="bold"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDanhSachSPDareu"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tvThuongHieuSPFuhlen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fuhlen"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:textStyle="bold"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDanhSachSPFuhlen"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tvThuongHieuSPLogitech"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logitech"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:textStyle="bold"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDanhSachSPLogitech"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tvThuongHieuSPRazer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Razer"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:textStyle="bold"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDanhSachSPRazer"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints" />
+
+</LinearLayout>
