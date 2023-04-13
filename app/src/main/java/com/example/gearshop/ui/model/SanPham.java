@@ -1,6 +1,8 @@
 package com.example.gearshop.ui.model;
 
-public class SanPham {
+import java.io.Serializable;
+
+public class SanPham implements Serializable {
     String tenSP, mieuTaSP, hinhAnh1, hinhAnh2, hinhAnh3;
     Integer maSP, maTL, maTH;
     Float giaSP;

@@ -23,7 +23,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvSP"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="95dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

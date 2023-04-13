@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if(currentFragment != FRAGMENT_HOME){
                 replaceFragment(new HomeFragment());
                 currentFragment = FRAGMENT_HOME;
-
             }
         } else if (id == R.id.nav_chuot) {
             if(currentFragment != FRAGMENT_CHUOT){

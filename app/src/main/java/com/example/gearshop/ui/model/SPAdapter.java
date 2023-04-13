@@ -1,28 +1,30 @@
 package com.example.gearshop.ui.model;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.util.Log;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gearshop.R;
+import com.example.gearshop.ui.chitietsanpham.ChiTietSanPham;
+import com.squareup.picasso.Picasso;
 
-import java.io.InputStream;
 import java.util.List;
 
 public class SPAdapter extends RecyclerView.Adapter<SPAdapter.SPAdapterHolder>{
     private List<SanPham> listSP;
+    Context mContext;
     View view;
-    public void setListSP(List<SanPham> list){
+    public void setListSP(Context context,  List<SanPham> list){
+        this.mContext = context;
         this.listSP = list;
         notifyDataSetChanged();
     }
@@ -35,14 +37,30 @@ public class SPAdapter extends RecyclerView.Adapter<SPAdapter.SPAdapterHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull SPAdapterHolder holder, int position) {
-        SanPham sp = listSP.get(position);
+        final SanPham sp = listSP.get(position);
         if(sp == null){
             return;
         }
         holder.tvTenSP.setText(sp.getTenSP());
         holder.tvGiaSP.setText(sp.getGiaSP().toString());
         holder.tvThuongHieuSP.setText(sp.getMaTH().toString());
-        new DownloadImageFromInternet((ImageView) view.findViewById(R.id.ivSanPham)).execute("https://pbs.twimg.com/profile_images/630285593268752384/iD1MkFQ0.png");
+        Picasso.get()
+                .load("https://drive.google.com/uc?id=" + sp.getHinhAnh1().substring(32,sp.getHinhAnh1().lastIndexOf('/')))
+                .into(holder.ivSanPham);
+        holder.llSanPham.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickGoToChiTietSanPham(sp);
+            }
+        });
+    }
+
+    private void onClickGoToChiTietSanPham(SanPham sp) {
+        Intent intent = new Intent(mContext, ChiTietSanPham.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("san_pham", sp);
+        intent.putExtras(bundle);
+        mContext.startActivity(intent);
     }
 
     @Override
@@ -54,6 +72,7 @@ public class SPAdapter extends RecyclerView.Adapter<SPAdapter.SPAdapterHolder>{
     }
 
     public class SPAdapterHolder extends RecyclerView.ViewHolder{
+        LinearLayout llSanPham;
         TextView tvTenSP, tvGiaSP, tvThuongHieuSP;
         ImageView ivSanPham;
 
@@ -67,28 +86,8 @@ public class SPAdapter extends RecyclerView.Adapter<SPAdapter.SPAdapterHolder>{
             tvGiaSP = itemView.findViewById(R.id.tvGiaSP);
             tvThuongHieuSP = itemView.findViewById(R.id.tvThuongHieuSP);
             ivSanPham = itemView.findViewById(R.id.ivSanPham);
+            llSanPham = itemView.findViewById(R.id.llSanPham);
         }
 
-    }
-    private class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {
-        ImageView imageView;
-        public DownloadImageFromInternet(ImageView imageView) {
-            this.imageView=imageView;
-        }
-        protected Bitmap doInBackground(String... urls) {
-            String imageURL=urls[0];
-            Bitmap bimage=null;
-            try {
-                InputStream in=new java.net.URL(imageURL).openStream();
-                bimage=BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error Message", e.getMessage());
-                e.printStackTrace();
-            }
-            return bimage;
-        }
-        protected void onPostExecute(Bitmap result) {
-            imageView.setImageBitmap(result);
-        }
     }
 }
