@@ -17,6 +17,12 @@
             android:name=".ui.chitietsanpham.ChiTietSanPham"
             android:exported="false" />
         <activity
+            android:name=".OrderListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CartListActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label=""
