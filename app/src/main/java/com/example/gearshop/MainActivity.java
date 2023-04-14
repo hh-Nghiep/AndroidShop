@@ -1,5 +1,6 @@
 package com.example.gearshop;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -12,6 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.gearshop.ui.chitietsanpham.ChiTietSanPham;
 import com.example.gearshop.ui.chuot.ChuotFragment;
 import com.example.gearshop.ui.home.HomeFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int FRAGMENT_HOME = 0;
     private static final int FRAGMENT_CHUOT = 1;
     private static final int FRAGMENT_BANPHIM = 2;
+
+    private static final int FRAGMENT_GIOHANG = 3;
 
     private int currentFragment = FRAGMENT_HOME;
 
@@ -65,6 +69,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 replaceFragment(new ChuotFragment());
                 currentFragment = FRAGMENT_BANPHIM;
             }
+        }else if (id == R.id.nav_giohang) {
+            Intent intent = new Intent(this, OrderListActivity.class);
+            this.startActivity(intent);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

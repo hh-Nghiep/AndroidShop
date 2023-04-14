@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.chitietsanpham.ChiTietSanPham"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_weight="1"
+    >
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vpChiTietSanPham"
@@ -51,12 +53,64 @@
             />
 
         <TextView
-            android:id="@+id/tvGiaTongSLCTSP"
+            android:id="@+id/tvGiaCTSP"
             android:layout_marginLeft="20dp"
-            android:textSize="18dp"
+            android:textSize="25dp"
             android:textColor="@color/black"
+            android:text="3.500.000 VND"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/tvTenChiTietSP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bàn Phím Logitecg G931 Deepsea"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textAlignment="center"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chi Tiết Sản Phẩm"
+            android:textSize="20dp"
+            android:textColor="@color/gray"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:textAlignment="center"/>
+        <TextView
+            android:id="@+id/tvChiTietSanPham"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chi Tiết Sản Phẩm"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center|bottom"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btnThemVaoGioHang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thêm Vào Giỏ Hàng"
+                android:layout_gravity="center_horizontal|center"
+                android:background="@drawable/blue_button"
+                />
+        </LinearLayout>
+
     </LinearLayout>
 
 

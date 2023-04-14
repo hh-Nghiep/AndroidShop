@@ -15,7 +15,7 @@ import com.example.gearshop.ui.model.SanPham;
 import com.squareup.picasso.Picasso;
 
 public class ChiTietSanPham extends AppCompatActivity {
-    TextView tvSoLuongCTSP, tvGiaTongSLCTSP;
+    TextView tvSoLuongCTSP, tvGiaCTSP;
     ImageView ivChiTietSanPham;
     ViewPager vpChiTietSanPham;
     Image_Adapter mViewPagerAdapter;
@@ -41,7 +41,7 @@ public class ChiTietSanPham extends AppCompatActivity {
         }
         SanPham sp = (SanPham) bundle.get("san_pham");
 
-        tvGiaTongSLCTSP.setText(sp.getGiaSP().toString());
+        tvGiaCTSP.setText(sp.getGiaSP().toString());
 
         imageUrls = new String[]{
                 "https://drive.google.com/uc?id=" + sp.getHinhAnh1().substring(32,sp.getHinhAnh1().lastIndexOf('/')),
@@ -57,7 +57,7 @@ public class ChiTietSanPham extends AppCompatActivity {
 
     private void setControl() {
         tvSoLuongCTSP = findViewById(R.id.tvSoLuongCTSP);
-        tvGiaTongSLCTSP = findViewById(R.id.tvGiaTongSLCTSP);
+        tvGiaCTSP = findViewById(R.id.tvGiaCTSP);
         vpChiTietSanPham = findViewById(R.id.vpChiTietSanPham);
     }
 
