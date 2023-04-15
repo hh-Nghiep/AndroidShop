@@ -23,7 +23,7 @@
             android:name=".CartListActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".menu_overlay"
             android:exported="true"
             android:label=""
             android:theme="@style/Theme.GearShop.NoActionBar">
