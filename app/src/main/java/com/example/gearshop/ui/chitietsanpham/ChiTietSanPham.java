@@ -28,7 +28,7 @@ public class ChiTietSanPham extends AppCompatActivity {
     Toolbar toolbar;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.activity_main_drawer, menu);
         return true;
     }
 

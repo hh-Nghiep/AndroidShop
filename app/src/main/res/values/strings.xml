@@ -14,5 +14,6 @@
     <string name="menu_chuot">Chuột</string>
     <string name="menu_banphim">Bàn Phím</string>
     <string name="menu_giohang">Giỏ Hàng</string>
+    <string name="menu_quanlysanpham">Quản Lý Sản Phẩm</string>
     <string name="menu_thoat">Thoát</string>
 </resources>

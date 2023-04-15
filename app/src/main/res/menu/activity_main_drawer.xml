@@ -39,6 +39,10 @@
     <item android:title="Khác" >
         <menu>
             <item
+                android:id="@+id/nav_quanlysanpham"
+                android:icon="@drawable/baseline_inventory_24"
+                android:title="@string/menu_quanlysanpham" />
+            <item
                 android:id="@+id/nav_thoat"
                 android:icon="@drawable/baseline_logout_24"
                 android:title="@string/menu_thoat" />

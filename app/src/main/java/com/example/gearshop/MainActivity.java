@@ -98,6 +98,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 replaceFragment(new HoTroFragment());
                 currentFragment = FRAGMENT_HOTRO;
             }
+        }else if (id == R.id.nav_quanlysanpham) {
+            Intent intent = new Intent(this, ActivityQuanLySanPham.class);
+            this.startActivity(intent);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
