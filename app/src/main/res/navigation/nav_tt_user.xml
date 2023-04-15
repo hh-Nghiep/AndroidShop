@@ -6,17 +6,17 @@
     app:startDestination="@id/menuThongTinUser">
     <fragment
         android:id="@+id/menuThongTinUser"
-        android:name="com.example.gearshop.InfoFragment"
+        android:name="com.example.gearshop.ui.nguoidung.InfoFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info" />
     <fragment
         android:id="@+id/menuThayDoiMK"
-        android:name="com.example.gearshop.PasswordFragment"
+        android:name="com.example.gearshop.ui.nguoidung.PasswordFragment"
         android:label="fragment_password"
         tools:layout="@layout/fragment_password" />
     <fragment
         android:id="@+id/menuHoTro"
-        android:name="com.example.gearshop.HoTroFragment"
+        android:name="com.example.gearshop.ui.nguoidung.HoTroFragment"
         android:label="fragment_ho_tro"
         tools:layout="@layout/fragment_ho_tro" />
 </navigation>

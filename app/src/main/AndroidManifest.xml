@@ -9,7 +9,7 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label=""
         android:supportsRtl="true"
         android:theme="@style/Theme.GearShop"
         tools:targetApi="31">
@@ -17,22 +17,13 @@
             android:name=".ui.chitietsanpham.ChiTietSanPham"
             android:exported="false" />
         <activity
+            android:name=".ui.giohang.OrderListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.giohang.CartListActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Them_SP"
-            android:exported="false" />
-        <activity
-            android:name=".UpdateActivity"
-            android:exported="false" />
-        <activity
-            android:name=".OrderListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CartListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TestActivity"
             android:exported="true"
             android:label=""
             android:theme="@style/Theme.GearShop.NoActionBar">

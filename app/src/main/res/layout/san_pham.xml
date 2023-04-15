@@ -25,6 +25,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/black"
+            android:textStyle="bold"
             android:text="Tên sản phẩm"/>
         <TextView
             android:id="@+id/tvGiaSP"
@@ -41,6 +42,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/black"
+            android:textStyle="bold"
             android:text="Thương hiệu"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

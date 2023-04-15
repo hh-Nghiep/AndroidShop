@@ -13,9 +13,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.gearshop.ui.chitietsanpham.ChiTietSanPham;
 import com.example.gearshop.ui.chuot.ChuotFragment;
+import com.example.gearshop.ui.giohang.CartListActivity;
+import com.example.gearshop.ui.giohang.OrderListActivity;
 import com.example.gearshop.ui.home.HomeFragment;
+import com.example.gearshop.ui.nguoidung.HoTroFragment;
+import com.example.gearshop.ui.nguoidung.InfoFragment;
+import com.example.gearshop.ui.nguoidung.PasswordFragment;
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -25,6 +29,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int FRAGMENT_BANPHIM = 2;
 
     private static final int FRAGMENT_GIOHANG = 3;
+
+    private static final int FRAGMENT_THONGTINNGUOIDUNG = 4;
+
+    private static final int FRAGMENT_THAYDOIMATKHAU = 5;
+
+    private static final int FRAGMENT_HOTRO = 6;
+
 
     private int currentFragment = FRAGMENT_HOME;
 
@@ -70,8 +81,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 currentFragment = FRAGMENT_BANPHIM;
             }
         }else if (id == R.id.nav_giohang) {
-            Intent intent = new Intent(this, OrderListActivity.class);
+            Intent intent = new Intent(this, CartListActivity.class);
             this.startActivity(intent);
+        }else if (id == R.id.nav_ThongTinUser) {
+            if(currentFragment != FRAGMENT_THONGTINNGUOIDUNG){
+                replaceFragment(new InfoFragment());
+                currentFragment = FRAGMENT_THONGTINNGUOIDUNG;
+            }
+        }else if (id == R.id.nav_ThayDoiMK) {
+            if(currentFragment != FRAGMENT_THAYDOIMATKHAU){
+                replaceFragment(new PasswordFragment());
+                currentFragment = FRAGMENT_THAYDOIMATKHAU;
+            }
+        }else if (id == R.id.nav_HoTro) {
+            if(currentFragment != FRAGMENT_HOTRO){
+                replaceFragment(new HoTroFragment());
+                currentFragment = FRAGMENT_HOTRO;
+            }
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
