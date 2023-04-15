@@ -42,10 +42,6 @@ public class ChuotFragment extends Fragment {
         setControl();
         setEvent();
         autoComplateChuot = view.findViewById(R.id.autoComplete_chuot);
-        adapterItems = new ArrayAdapter<String>(view.getContext(), R.layout.thuong_hieu, items);
-
-        autoComplateChuot.setAdapter(adapterItems);
-
         autoComplateChuot.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
