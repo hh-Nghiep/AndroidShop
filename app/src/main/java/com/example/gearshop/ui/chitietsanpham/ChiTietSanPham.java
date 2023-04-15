@@ -11,11 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.gearshop.CartListActivity;
-import com.example.gearshop.OrderListActivity;
+import com.example.gearshop.ui.giohang.CartListActivity;
 import com.example.gearshop.R;
 import com.example.gearshop.ui.model.Image_Adapter;
 import com.example.gearshop.ui.model.SanPham;

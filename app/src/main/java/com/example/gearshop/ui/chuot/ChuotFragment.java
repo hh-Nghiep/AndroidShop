@@ -24,7 +24,6 @@ import java.util.ArrayList;
 public class ChuotFragment extends Fragment {
     String[] items = {"Corsair", "Dare-u", "Fuhlen", "Logitech",  "Razer"};
     AutoCompleteTextView autoComplateChuot;
-    ArrayAdapter<String> adapterItems;
     View view;
 
     SanPham SP = null;
