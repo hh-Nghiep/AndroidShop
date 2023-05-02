@@ -22,7 +22,7 @@ public class SanPham implements Serializable {
                 '}';
     }
 
-    public SanPham(String tenSP, String mieuTaSP, String hinhAnh1, String hinhAnh2, String hinhAnh3, Integer maSP, Integer maTL, Integer maTH, Float giaSP) {
+    public SanPham(Integer maSP, String tenSP, Float giaSP, Integer maTL, Integer maTH, String mieuTaSP, String hinhAnh1, String hinhAnh2, String hinhAnh3) {
         this.tenSP = tenSP;
         this.mieuTaSP = mieuTaSP;
         this.hinhAnh1 = hinhAnh1;

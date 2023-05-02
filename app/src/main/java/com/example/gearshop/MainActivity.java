@@ -45,27 +45,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     NavigationView navigationView;
 
-    Connection connection;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        try {
-            ConnectSQL con = new ConnectSQL();
-            connection = con.CONN();
-            if(connection != null){
-                String query = "select * from LoaiTaiKhoan";
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(query);
-                System.err.print("ok");
-            }
-        }catch (Exception ex){
-            System.err.print(ex.getMessage());
-        }
-
-
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

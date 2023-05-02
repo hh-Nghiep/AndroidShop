@@ -6,12 +6,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.icu.text.DecimalFormat;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gearshop.ui.giohang.CartListActivity;
 import com.example.gearshop.R;
@@ -19,11 +21,11 @@ import com.example.gearshop.ui.model.Image_Adapter;
 import com.example.gearshop.ui.model.SanPham;
 
 public class ChiTietSanPham extends AppCompatActivity {
-    TextView tvSoLuongCTSP, tvGiaCTSP;
+    TextView tvSoLuongCTSP, tvGiaCTSP, tvTenChiTietSP, tvChiTietSP;
     ViewPager vpChiTietSanPham;
     Image_Adapter mViewPagerAdapter;
     String[] imageUrls;
-    Button btnThemVaoGioHang;
+    Button btnThemVaoGioHang, btnCong, btnTru;
 
     Toolbar toolbar;
     @Override
@@ -64,7 +66,25 @@ public class ChiTietSanPham extends AppCompatActivity {
             }
         });
 
+        btnCong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int soLuong = Integer.parseInt(tvSoLuongCTSP.getText().toString());
+                tvSoLuongCTSP.setText(String.valueOf(soLuong+1));
+            }
+        });
 
+        btnTru.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int soLuong = Integer.parseInt(tvSoLuongCTSP.getText().toString());
+                if(soLuong > 1){
+                    tvSoLuongCTSP.setText(String.valueOf(soLuong-1));
+                }else{
+                    Toast.makeText(ChiTietSanPham.this, "Số lượng không thể nhỏ hơn 1 !!!",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     private void setThongTinSanPham(){
@@ -72,9 +92,13 @@ public class ChiTietSanPham extends AppCompatActivity {
         if(bundle == null){
             return;
         }
+        DecimalFormat formatter = new DecimalFormat("###,###,###.##");
         SanPham sp = (SanPham) bundle.get("san_pham");
+        String giaSP = formatter.format(sp.getGiaSP())+" VNĐ";
+        tvGiaCTSP.setText(giaSP);
+        tvTenChiTietSP.setText(sp.getTenSP());
+        tvChiTietSP.setText(sp.getMieuTaSP());
 
-        tvGiaCTSP.setText(sp.getGiaSP().toString());
 
         imageUrls = new String[]{
                 "https://drive.google.com/uc?id=" + sp.getHinhAnh1().substring(32,sp.getHinhAnh1().lastIndexOf('/')),
@@ -90,9 +114,13 @@ public class ChiTietSanPham extends AppCompatActivity {
 
     private void setControl() {
         tvSoLuongCTSP = findViewById(R.id.tvSoLuongCTSP);
+        tvTenChiTietSP = findViewById(R.id.tvTenChiTietSP);
+        tvChiTietSP = findViewById(R.id.tvChiTietSanPham);
         tvGiaCTSP = findViewById(R.id.tvGiaCTSP);
         vpChiTietSanPham = findViewById(R.id.vpChiTietSanPham);
         btnThemVaoGioHang = findViewById(R.id.btnThemVaoGioHang);
+        btnCong = findViewById(R.id.btnCongSoLuongCTSP);
+        btnTru = findViewById(R.id.btnTruSoLuongCTSP);
     }
 
 

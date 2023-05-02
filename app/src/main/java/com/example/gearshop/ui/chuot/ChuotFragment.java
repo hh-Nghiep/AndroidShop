@@ -15,10 +15,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.example.gearshop.ConnectSQL;
 import com.example.gearshop.R;
 import com.example.gearshop.ui.model.SPAdapter;
 import com.example.gearshop.ui.model.SanPham;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ChuotFragment extends Fragment {
@@ -32,6 +36,8 @@ public class ChuotFragment extends Fragment {
     ListView lvDanhSachSP;
     RecyclerView rcvSP;
     SPAdapter spAdapter;
+
+    Connection connection;
 
     @NonNull
     @Override
@@ -63,11 +69,25 @@ public class ChuotFragment extends Fragment {
     }
 
     private void KhoiTao(){
-        dataSP.add(new SanPham("G102", "Sản Phẩm 1", "https://drive.google.com/file/d/1Ik50QrnkZf79DV-mtAS3t_bsp-nJ7ii9/view", "https://drive.google.com/file/d/17mX8ppREgri1VfoT59qHqPQl1wwSvRDe/view?usp=share_link", "https://drive.google.com/file/d/1Ba0yNq3Hz_GYtyGWAquJg8uryLgOHukW/view?usp=share_link", 1, 1, 1, 100F));
-        dataSP.add(new SanPham("G403", "Sản Phẩm 2", "https://drive.google.com/file/d/17mX8ppREgri1VfoT59qHqPQl1wwSvRDe/view?usp=share_link", "hinhAnh2", "hinhAnh3", 2, 2, 2, 200F));
-        dataSP.add(new SanPham("G502", "Sản Phẩm 3", "https://drive.google.com/file/d/1Ba0yNq3Hz_GYtyGWAquJg8uryLgOHukW/view?usp=share_link", "hinhAnh2", "hinhAnh3", 3, 3, 3, 300F));
-        dataSP.add(new SanPham("G903", "Sản Phẩm 4", "https://drive.google.com/file/d/13Jv1_vTtGH6p2XHcTyiBs_-_8pLK_IvH/view?usp=share_link", "hinhAnh2", "hinhAnh3", 4, 4, 4, 400F));
-        dataSP.add(new SanPham("G-Pro", "Sản Phẩm 5", "https://drive.google.com/file/d/112Vj3BQvoobCJxt4tzDcvNs6juBhnUhT/view?usp=share_link", "hinhAnh2", "hinhAnh3", 5, 5, 5, 500F));
+        try {
+            ConnectSQL con = new ConnectSQL();
+            connection = con.CONN();
+            if(connection != null){
+                String query = "select * from SanPham";
+                Statement statement = connection.createStatement();
+                ResultSet rs = statement.executeQuery(query);
+                while (rs.next()){
+                    dataSP.add(new SanPham(rs.getInt(1), rs.getString(2), rs.getFloat(3), rs.getInt(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9)));
+                }
+            }
+        }catch (Exception ex){
+            System.err.print(ex.getMessage());
+        }
+//        dataSP.add(new SanPham("G102", "Sản Phẩm 1", "https://drive.google.com/file/d/1Ik50QrnkZf79DV-mtAS3t_bsp-nJ7ii9/view", "https://drive.google.com/file/d/17mX8ppREgri1VfoT59qHqPQl1wwSvRDe/view?usp=share_link", "https://drive.google.com/file/d/1Ba0yNq3Hz_GYtyGWAquJg8uryLgOHukW/view?usp=share_link", 1, 1, 1, 100F));
+//        dataSP.add(new SanPham("G403", "Sản Phẩm 2", "https://drive.google.com/file/d/17mX8ppREgri1VfoT59qHqPQl1wwSvRDe/view?usp=share_link", "hinhAnh2", "hinhAnh3", 2, 2, 2, 200F));
+//        dataSP.add(new SanPham("G502", "Sản Phẩm 3", "https://drive.google.com/file/d/1Ba0yNq3Hz_GYtyGWAquJg8uryLgOHukW/view?usp=share_link", "hinhAnh2", "hinhAnh3", 3, 3, 3, 300F));
+//        dataSP.add(new SanPham("G903", "Sản Phẩm 4", "https://drive.google.com/file/d/13Jv1_vTtGH6p2XHcTyiBs_-_8pLK_IvH/view?usp=share_link", "hinhAnh2", "hinhAnh3", 4, 4, 4, 400F));
+//        dataSP.add(new SanPham("G-Pro", "Sản Phẩm 5", "https://drive.google.com/file/d/112Vj3BQvoobCJxt4tzDcvNs6juBhnUhT/view?usp=share_link", "hinhAnh2", "hinhAnh3", 5, 5, 5, 500F));
     }
 
     private void setControl() {
