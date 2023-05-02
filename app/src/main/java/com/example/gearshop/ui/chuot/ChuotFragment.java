@@ -73,7 +73,7 @@ public class ChuotFragment extends Fragment {
             ConnectSQL con = new ConnectSQL();
             connection = con.CONN();
             if(connection != null){
-                String query = "select * from SanPham";
+                String query = "select * from SanPham where maTL = 1";
                 Statement statement = connection.createStatement();
                 ResultSet rs = statement.executeQuery(query);
                 while (rs.next()){
