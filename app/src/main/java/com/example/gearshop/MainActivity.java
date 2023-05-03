@@ -13,6 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.gearshop.ui.banphim.BanPhimFragment;
 import com.example.gearshop.ui.chuot.ChuotFragment;
 import com.example.gearshop.ui.giohang.CartListActivity;
 import com.example.gearshop.ui.home.HomeFragment;
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }else if (id == R.id.nav_banphim) {
             if(currentFragment != FRAGMENT_BANPHIM){
-                replaceFragment(new ChuotFragment());
+                replaceFragment(new BanPhimFragment());
                 currentFragment = FRAGMENT_BANPHIM;
             }
         }else if (id == R.id.nav_giohang) {
