@@ -43,7 +43,9 @@ public class Image_Adapter extends PagerAdapter {
         }else {
             imageView.setImageResource(R.drawable.baseline_help_center_24);
         }
+
         container.addView(imageView);
+
         return imageView;
     }
 
