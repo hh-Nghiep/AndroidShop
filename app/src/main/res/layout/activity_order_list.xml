@@ -10,12 +10,10 @@
         android:layout_marginTop="55dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
@@ -55,10 +53,9 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView8" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ListView
-                android:id="@+id/orderLv"
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="342dp" />
+                android:layout_height="match_parent" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -72,7 +69,7 @@
                 <TextView
                     android:id="@+id/totalPriceNoShip"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Thành tiền"
                     android:textSize="18sp"
@@ -82,17 +79,10 @@
                     android:id="@+id/totalPriceNoShipTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
+                    android:text="0 VNĐ"
                     android:textSize="18sp"
                     android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/textViewa11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:text="VNĐ"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -118,17 +108,10 @@
                     android:id="@+id/shipPriceTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
+                    android:text="0 VNĐ"
                     android:textSize="18sp"
                     android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/textView123"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:text="VNĐ"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -153,19 +136,11 @@
                     android:id="@+id/totalPriceTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
+                    android:text="0 VNĐ"
                     android:textSize="18sp"
                     android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:text="VNĐ"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
 
+            </LinearLayout>
             <Button
                 android:id="@+id/btnDatHang"
                 android:layout_width="match_parent"
@@ -176,7 +151,8 @@
                 android:textAlignment="center"
                 android:textColor="#ffff"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
         </LinearLayout>
     </ScrollView>
 
