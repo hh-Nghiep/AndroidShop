@@ -44,14 +44,9 @@ public class SPAdapter extends RecyclerView.Adapter<SPAdapter.SPAdapterHolder>{
         holder.tvTenSP.setText(sp.getTenSP());
         holder.tvGiaSP.setText(sp.getGiaSP().toString());
         holder.tvThuongHieuSP.setText(sp.getMaTH().toString());
-        if(sp.getHinhAnh1().length() > 32){
-            Picasso.get()
-                    .load("https://drive.google.com/uc?id=" + sp.getHinhAnh1().substring(32,sp.getHinhAnh1().lastIndexOf('/')))
-                    .into(holder.ivSanPham);
-        }else{
-            holder.ivSanPham.setImageResource(R.drawable.baseline_help_center_24);
-        }
-
+        Picasso.get()
+                .load("https://drive.google.com/uc?id=" + sp.getHinhAnh1().substring(32,sp.getHinhAnh1().lastIndexOf('/')))
+                .into(holder.ivSanPham);
         holder.llSanPham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
