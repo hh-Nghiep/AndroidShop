@@ -1,4 +1,4 @@
-package com.example.gearshop.ui.cart;
+package com.example.gearshop.ui.orderHistory;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -12,17 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.gearshop.R;
-import com.squareup.picasso.Picasso;
-
+import com.example.gearshop.ui.cart.CartItem;
 
 import java.util.ArrayList;
 
-public class CartArrayAdapter extends ArrayAdapter<CartItem> {
+public class CustomCartArrayAdapter extends ArrayAdapter<CartItem> {
     Activity context;
     int IdLayout;
     ArrayList<CartItem> cartItemsList;
 
-    public CartArrayAdapter( Activity context, int idLayout, ArrayList<CartItem> cartItemsList) {
+    public CustomCartArrayAdapter(Activity context, int idLayout, ArrayList<CartItem> cartItemsList) {
         super(context, idLayout, cartItemsList);
         this.context = context;
         IdLayout = idLayout;
@@ -33,7 +32,7 @@ public class CartArrayAdapter extends ArrayAdapter<CartItem> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        System.out.println("call here");
+
         LayoutInflater myFlater = context.getLayoutInflater();
 
         convertView = myFlater.inflate(IdLayout, null);
