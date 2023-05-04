@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.gearshop.ui.banphim.BanPhimFragment;
 import com.example.gearshop.ui.chuot.ChuotFragment;
 import com.example.gearshop.ui.giohang.CartListActivity;
+import com.example.gearshop.ui.giohang.OrderHistoryActivity;
 import com.example.gearshop.ui.home.HomeFragment;
 import com.example.gearshop.ui.nguoidung.HoTroFragment;
 import com.example.gearshop.ui.nguoidung.InfoFragment;
@@ -88,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }else if (id == R.id.nav_giohang) {
             Intent intent = new Intent(this, CartListActivity.class);
+            this.startActivity(intent);
+        }else if (id == R.id.nav_DSDonHang) {
+            Intent intent = new Intent(this, OrderHistoryActivity.class);
             this.startActivity(intent);
         }else if (id == R.id.nav_ThongTinUser) {
             if(currentFragment != FRAGMENT_THONGTINNGUOIDUNG){

@@ -25,9 +25,10 @@
           android:textSize="25sp"
           android:textStyle="bold" />
 
-      <androidx.recyclerview.widget.RecyclerView
+      <ListView
+          android:id="@+id/CartLV"
           android:layout_width="match_parent"
-          android:layout_height="match_parent" />
+          android:layout_height="357dp" />
 
       <LinearLayout
           android:layout_width="match_parent"
@@ -49,7 +50,16 @@
             android:id="@+id/totalPriceTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0 VNĐ"
+            android:text="0"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:text="VNĐ"
             android:textSize="18sp"
             android:textStyle="bold" />
 
