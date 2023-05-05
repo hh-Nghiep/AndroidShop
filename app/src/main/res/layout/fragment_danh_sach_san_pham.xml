@@ -14,7 +14,7 @@
         android:hint="@string/select_all"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
         <AutoCompleteTextView
-            android:id="@+id/autoComplete_chuot"
+            android:id="@+id/autoComplete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
