@@ -27,5 +27,5 @@
         android:id="@+id/nav_chuot"
         android:name="com.example.gearshop.ui.chuot.ChuotFragment"
         android:label="Chuột"
-        tools:layout="@layout/fragment_chuot" />
+        tools:layout="@layout/fragment_danh_sach_san_pham" />
 </navigation>
