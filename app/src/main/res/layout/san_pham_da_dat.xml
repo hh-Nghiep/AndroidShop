@@ -34,36 +34,27 @@
         app:layout_constraintStart_toEndOf="@+id/picCart"
         app:layout_constraintTop_toTopOf="@+id/picCart" />
 
-    <ImageButton
-        android:id="@+id/minusCartBtn"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="108dp"
+        android:text="Số lượng: "
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/picCart"
-        app:layout_constraintStart_toStartOf="@+id/cartItemTitleTxt"
-        app:srcCompat="@drawable/minus" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/numberItemTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:text="1"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/minusCartBtn"
-        app:layout_constraintStart_toEndOf="@+id/minusCartBtn"
-        app:layout_constraintTop_toTopOf="@+id/minusCartBtn" />
-
-    <ImageButton
-        android:id="@+id/plusCartBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/minusCartBtn"
-        app:layout_constraintStart_toEndOf="@+id/numberItemTxt"
-        app:layout_constraintTop_toTopOf="@+id/minusCartBtn"
-        app:srcCompat="@drawable/plus" />
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView7"
@@ -95,9 +86,8 @@
         android:text="VNĐ"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/plusCartBtn"
-        app:layout_constraintEnd_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toTopOf="@+id/plusCartBtn" />
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="@+id/textView7" />
 
     <TextView
         android:id="@+id/priceTotalItem"

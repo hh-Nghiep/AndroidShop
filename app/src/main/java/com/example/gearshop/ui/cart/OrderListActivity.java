@@ -1,4 +1,4 @@
-package com.example.gearshop.ui.giohang;
+package com.example.gearshop.ui.cart;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,10 +12,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.gearshop.MainActivity;
 import com.example.gearshop.R;
 import com.example.gearshop.ui.cart.CartArrayAdapter;
 import com.example.gearshop.ui.cart.CartItem;
-import com.example.gearshop.ui.orderHistory.CustomCartArrayAdapter;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,7 @@ public class OrderListActivity extends AppCompatActivity {
     Toolbar toolbar;
     TextView totalPriceNoShipTxt, shipPriceTxt, totalPriceTxt;
     ArrayList<CartItem> cartItemsList;
-    CustomCartArrayAdapter cartArrayAdapter;
+    CartArrayAdapter cartArrayAdapter;
     ListView lv;
 
     @Override
@@ -42,7 +42,7 @@ public class OrderListActivity extends AppCompatActivity {
         btnDatHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(OrderListActivity.this, OrderHistoryActivity.class);
+                Intent intent = new Intent(OrderListActivity.this, MainActivity.class);
                 OrderListActivity.this.startActivity(intent);
             }
         });
@@ -69,20 +69,20 @@ public class OrderListActivity extends AppCompatActivity {
         btnDatHang = findViewById(R.id.btnDatHang);
         totalPriceNoShipTxt = findViewById(R.id.totalPriceNoShipTxt);
         shipPriceTxt= findViewById(R.id.shipPriceTxt);
-        totalPriceTxt = findViewById(R.id.orderHistoryTotalPriceTxt);
+        totalPriceTxt = findViewById(R.id.totalPriceTxt);
 
         lv = findViewById(R.id.orderLv);
         cartItemsList = createMockup();
 
         int total = 0;
-        for (int i = 0; i < CartListActivity.cartItemsList.size(); i++) {
-            total+= (CartListActivity.cartItemsList.get(i).getInitPrice() * CartListActivity.cartItemsList.get(i).getAmout());
+        for (int i = 0; i < cartItemsList.size(); i++) {
+            total+= (cartItemsList.get(i).getInitPrice() * cartItemsList.get(i).getAmout());
         }
         totalPriceNoShipTxt.setText(String.format("%,d",total));
         shipPriceTxt.setText("25,000");
         totalPriceTxt.setText((String.format("%,d", total + 25000)));
 
-        cartArrayAdapter = new CustomCartArrayAdapter(OrderListActivity.this,  CartListActivity.cartItemsList);
+        cartArrayAdapter = new CartArrayAdapter(OrderListActivity.this, R.layout.viewholder_cart, cartItemsList);
 
         lv.setAdapter(cartArrayAdapter);
     }
