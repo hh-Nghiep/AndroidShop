@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.example.gearshop.R;
 import com.example.gearshop.ui.cart.CartArrayAdapter;
 import com.example.gearshop.ui.cart.CartItem;
-import com.example.gearshop.ui.orderHistory.CustomCartArrayAdapter;
 
 import java.util.ArrayList;
 
@@ -24,7 +23,7 @@ public class OrderListActivity extends AppCompatActivity {
     Toolbar toolbar;
     TextView totalPriceNoShipTxt, shipPriceTxt, totalPriceTxt;
     ArrayList<CartItem> cartItemsList;
-    CustomCartArrayAdapter cartArrayAdapter;
+    CartArrayAdapter cartArrayAdapter;
     ListView lv;
 
     @Override
@@ -75,14 +74,14 @@ public class OrderListActivity extends AppCompatActivity {
         cartItemsList = createMockup();
 
         int total = 0;
-        for (int i = 0; i < CartListActivity.cartItemsList.size(); i++) {
-            total+= (CartListActivity.cartItemsList.get(i).getInitPrice() * CartListActivity.cartItemsList.get(i).getAmout());
+        for (int i = 0; i < cartItemsList.size(); i++) {
+            total+= (cartItemsList.get(i).getInitPrice() * cartItemsList.get(i).getAmout());
         }
         totalPriceNoShipTxt.setText(String.format("%,d",total));
         shipPriceTxt.setText("25,000");
         totalPriceTxt.setText((String.format("%,d", total + 25000)));
 
-        cartArrayAdapter = new CustomCartArrayAdapter(OrderListActivity.this,  CartListActivity.cartItemsList);
+        cartArrayAdapter = new CartArrayAdapter(OrderListActivity.this, R.layout.viewholder_cart, cartItemsList);
 
         lv.setAdapter(cartArrayAdapter);
     }
