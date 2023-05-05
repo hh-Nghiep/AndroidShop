@@ -33,7 +33,7 @@ public class CartArrayAdapter extends ArrayAdapter<CartItem> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        System.out.println("call here");
+
         LayoutInflater myFlater = context.getLayoutInflater();
 
         convertView = myFlater.inflate(IdLayout, null);

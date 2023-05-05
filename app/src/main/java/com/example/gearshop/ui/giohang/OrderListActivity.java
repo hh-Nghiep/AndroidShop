@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.gearshop.MainActivity;
 import com.example.gearshop.R;
 import com.example.gearshop.ui.cart.CartArrayAdapter;
 import com.example.gearshop.ui.cart.CartItem;
@@ -41,7 +42,7 @@ public class OrderListActivity extends AppCompatActivity {
         btnDatHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(OrderListActivity.this, OrderHistoryActivity.class);
+                Intent intent = new Intent(OrderListActivity.this, MainActivity.class);
                 OrderListActivity.this.startActivity(intent);
             }
         });
@@ -68,7 +69,7 @@ public class OrderListActivity extends AppCompatActivity {
         btnDatHang = findViewById(R.id.btnDatHang);
         totalPriceNoShipTxt = findViewById(R.id.totalPriceNoShipTxt);
         shipPriceTxt= findViewById(R.id.shipPriceTxt);
-        totalPriceTxt = findViewById(R.id.orderHistoryTotalPriceTxt);
+        totalPriceTxt = findViewById(R.id.totalPriceTxt);
 
         lv = findViewById(R.id.orderLv);
         cartItemsList = createMockup();
