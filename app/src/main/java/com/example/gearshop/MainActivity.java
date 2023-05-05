@@ -21,6 +21,11 @@ import com.example.gearshop.ui.nguoidung.InfoFragment;
 import com.example.gearshop.ui.nguoidung.PasswordFragment;
 import com.google.android.material.navigation.NavigationView;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int FRAGMENT_HOME = 0;
     private static final int FRAGMENT_CHUOT = 1;
