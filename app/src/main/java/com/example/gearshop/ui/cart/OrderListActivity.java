@@ -16,6 +16,7 @@ import com.example.gearshop.MainActivity;
 import com.example.gearshop.R;
 import com.example.gearshop.ui.cart.CartArrayAdapter;
 import com.example.gearshop.ui.cart.CartItem;
+import com.example.gearshop.ui.chuot.ChuotFragment;
 
 import java.util.ArrayList;
 
@@ -42,8 +43,8 @@ public class OrderListActivity extends AppCompatActivity {
         btnDatHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(OrderListActivity.this, MainActivity.class);
-                OrderListActivity.this.startActivity(intent);
+                Intent intent = new Intent(OrderListActivity.this, ChuotFragment.class);
+                startActivity(intent);
             }
         });
     }

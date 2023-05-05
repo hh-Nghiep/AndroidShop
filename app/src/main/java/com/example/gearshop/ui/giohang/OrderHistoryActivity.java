@@ -4,14 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.gearshop.MainActivity;
 import com.example.gearshop.R;
 import com.example.gearshop.ui.cart.CartItem;
+import com.example.gearshop.ui.home.HomeFragment;
 import com.example.gearshop.ui.orderHistory.OrderHistoryAdapter;
 import com.example.gearshop.ui.orderHistory.OrderHistoryItem;
 
@@ -74,7 +77,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                this.finish();
+                Intent intent = new Intent(OrderHistoryActivity.this, MainActivity.class);
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);

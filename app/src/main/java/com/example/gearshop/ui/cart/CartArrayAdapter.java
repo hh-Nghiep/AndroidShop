@@ -80,18 +80,18 @@ public class CartArrayAdapter extends ArrayAdapter<CartItem> {
         plusCartBtn = convertView.findViewById(R.id.plusCartBtn);
         numberItemTxt = convertView.findViewById(R.id.numberItemTxt);
 
-        plusCartBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int number = CartListActivity.cartItemsList.get(position).getAmout() + 1;
-                   CartListActivity.cartItemsList.get(position).setAmout(number);
-                   numberItemTxt.setText(String.valueOf(number));
-
-//              numberItemTxt.setText(String.valueOf(number));
-//                CartArrayAdapter.notifyDataSetChanged();
-//          }
-            }
-        });
+//        plusCartBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int number = CartListActivity.cartItemsList.get(position).getAmout() + 1;
+//                   CartListActivity.cartItemsList.get(position).setAmout(number);
+//                   numberItemTxt.setText(String.valueOf(number));
+//
+////              numberItemTxt.setText(String.valueOf(number));
+////                CartArrayAdapter.notifyDataSetChanged();
+////          }
+//            }
+//        });
 
         cartImg.setImageResource(item.getImg());
 
