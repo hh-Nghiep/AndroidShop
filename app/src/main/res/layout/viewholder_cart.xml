@@ -34,7 +34,7 @@
         app:layout_constraintStart_toEndOf="@+id/picCart"
         app:layout_constraintTop_toTopOf="@+id/picCart" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/minusCartBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
         app:layout_constraintStart_toEndOf="@+id/minusCartBtn"
         app:layout_constraintTop_toTopOf="@+id/minusCartBtn" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/plusCartBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
