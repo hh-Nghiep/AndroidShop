@@ -13,19 +13,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.gearshop.ui.banphim.BanPhimFragment;
 import com.example.gearshop.ui.chuot.ChuotFragment;
 import com.example.gearshop.ui.giohang.CartListActivity;
-import com.example.gearshop.ui.giohang.OrderHistoryActivity;
 import com.example.gearshop.ui.home.HomeFragment;
 import com.example.gearshop.ui.nguoidung.HoTroFragment;
 import com.example.gearshop.ui.nguoidung.InfoFragment;
 import com.example.gearshop.ui.nguoidung.PasswordFragment;
 import com.google.android.material.navigation.NavigationView;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int FRAGMENT_HOME = 0;
@@ -83,14 +78,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }else if (id == R.id.nav_banphim) {
             if(currentFragment != FRAGMENT_BANPHIM){
-                replaceFragment(new ChuotFragment());
+                replaceFragment(new BanPhimFragment());
                 currentFragment = FRAGMENT_BANPHIM;
             }
         }else if (id == R.id.nav_giohang) {
             Intent intent = new Intent(this, CartListActivity.class);
-            this.startActivity(intent);
-        }else if (id == R.id.nav_DSDonHang) {
-            Intent intent = new Intent(this, OrderHistoryActivity.class);
             this.startActivity(intent);
         }else if (id == R.id.nav_ThongTinUser) {
             if(currentFragment != FRAGMENT_THONGTINNGUOIDUNG){
