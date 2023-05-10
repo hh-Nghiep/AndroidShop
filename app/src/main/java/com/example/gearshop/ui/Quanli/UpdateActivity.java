@@ -1,8 +1,10 @@
-package com.example.gearshop;
+package com.example.gearshop.ui.Quanli;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.gearshop.R;
 
 public class UpdateActivity extends AppCompatActivity {
 
