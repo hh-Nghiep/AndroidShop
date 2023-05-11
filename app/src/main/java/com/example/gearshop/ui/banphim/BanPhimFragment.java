@@ -1,4 +1,4 @@
-package com.example.gearshop.ui.chuot;
+package com.example.gearshop.ui.banphim;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,8 +25,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class ChuotFragment extends Fragment {
-    String[] items = {"Corsair", "Dare-u", "Fuhlen", "Logitech",  "Razer"};
+public class BanPhimFragment extends Fragment {
+    String[] items = {"Akko", "Ducky", "iKBC", "Logitech"};
     AutoCompleteTextView autoComplate;
     ArrayAdapter<String> adapterItems;
     View view;
@@ -73,7 +73,7 @@ public class ChuotFragment extends Fragment {
             ConnectSQL con = new ConnectSQL();
             connection = con.CONN();
             if(connection != null){
-                String query = "select * from SanPham where maTL = 1";
+                String query = "select * from SanPham where maTL = 2";
                 Statement statement = connection.createStatement();
                 ResultSet rs = statement.executeQuery(query);
                 while (rs.next()){

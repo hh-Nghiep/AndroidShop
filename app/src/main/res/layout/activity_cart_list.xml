@@ -28,7 +28,7 @@
       <ListView
           android:id="@+id/CartLV"
           android:layout_width="match_parent"
-          android:layout_height="507dp" />
+          android:layout_height="357dp" />
 
       <LinearLayout
           android:layout_width="match_parent"

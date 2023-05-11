@@ -1,37 +1,78 @@
 package com.example.gearshop.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager.widget.ViewPager;
 
-import com.example.gearshop.databinding.FragmentHomeBinding;
+import com.example.gearshop.R;
+import com.example.gearshop.ui.login_register.ui.login.LoginActivity;
+import com.example.gearshop.ui.login_register.ui.login.RegisterActivity;
+import com.example.gearshop.ui.model.Image_Adapter;
 
 public class HomeFragment extends Fragment {
+    View view;
+    EditText taiKhoan, passWord;
+    TextView tvDangNhap, tvDangKy;
+    ViewPager vpHome;
 
-    private FragmentHomeBinding binding;
+    Image_Adapter mViewPagerAdapter;
+
+    String[] imageUrls;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        view = inflater.inflate(R.layout.fragment_home, container, false);
+        setControl();
+        setEvent();
+        return view;
+    }
+    private void setEvent() {
+        KhoiTao();
+        tvDangNhap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeFragment.this.getActivity(), LoginActivity.class);
+                HomeFragment.this.startActivity(intent);
+            }
+        });
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+        tvDangKy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeFragment.this.getActivity(), RegisterActivity.class);
+                HomeFragment.this.startActivity(intent);
+            }
+        });
     }
 
+    private void KhoiTao(){
+        imageUrls = new String[5];
+        imageUrls[0] = "https://drive.google.com/uc?id=" + "14oBbR5E0cwzH4fVnQuIt78087EydsRBX";
+        imageUrls[1] = "https://drive.google.com/uc?id=" + "1DJvzwcKwcspr-0ab8vCzMkEZTCMIRhjI";
+        imageUrls[2] = "https://drive.google.com/uc?id=" + "1bmFwvTkgYHt6AQHRuHnNZObg3YvZlPPO";
+        imageUrls[3] = "https://drive.google.com/uc?id=" + "1KK5ybqtUjWqrGMHvcKOa0ZbUd0AMsNHI";
+        imageUrls[4] = "https://drive.google.com/uc?id=" + "1Q1NEJXMqFYOaJorlgBzQLVPOVt_dZ3LB";
+        mViewPagerAdapter = new Image_Adapter(this.getContext(), imageUrls);
+        vpHome.setAdapter(mViewPagerAdapter);
+    }
+
+    private void setControl() {
+        taiKhoan = view.findViewById(R.id.taikhoan);
+        passWord = view.findViewById(R.id.password);
+        vpHome = view.findViewById(R.id.vphome);
+        tvDangNhap = view.findViewById(R.id.tvDangNhap);
+        tvDangKy = view.findViewById(R.id.tvDangKy);
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
     }
 }

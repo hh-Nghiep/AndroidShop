@@ -58,7 +58,7 @@
             <ListView
                 android:id="@+id/orderLv"
                 android:layout_width="match_parent"
-                android:layout_height="342dp" />
+                android:layout_height="258dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -150,7 +150,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/totalPriceTxt"
+                    android:id="@+id/orderHistoryTotalPriceTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
