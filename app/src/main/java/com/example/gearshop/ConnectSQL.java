@@ -12,7 +12,7 @@ public class ConnectSQL {
     String classs = "net.sourceforge.jtds.jdbc.Driver";
     String db = "gearshop";
     String un = "sa";
-    String password = "123";
+    String password = "0929149011";
 
     String port = "1433";
 
