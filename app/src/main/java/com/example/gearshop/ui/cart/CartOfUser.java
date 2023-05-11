@@ -8,4 +8,6 @@ import java.util.ArrayList;
 
 public class CartOfUser {
     public static ArrayList<SanPham> CartUser = new ArrayList<>();
+    public static ArrayList<CartItem> globalCart = new ArrayList<>();
+    public static CustomerAddress customerAddress;
 }

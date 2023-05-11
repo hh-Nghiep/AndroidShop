@@ -93,7 +93,7 @@ public class CustomCartArrayAdapter extends BaseAdapter {
                 CartListActivity.cartItemsList.get(position).setAmout(slmoinhat);
                 CartListActivity.cartItemsList.get(position).setTotalPrice(giaTongMoi);
                 finalViewHolder.priceTotalItem.setText(String.format("%,d",giaTongMoi));
-
+                CartListActivity.tinhTongTien(CartListActivity.cartItemsList);
                 finalViewHolder.numberItemTxt.setText(String.valueOf(slmoinhat));
             }
         });
