@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.example.gearshop.R;
 import com.example.gearshop.ui.cart.CartArrayAdapter;
 import com.example.gearshop.ui.cart.CartItem;
+import com.example.gearshop.ui.cart.CartOfUser;
+import com.example.gearshop.ui.model.SanPham;
 import com.example.gearshop.ui.orderHistory.CustomCartArrayAdapter;
 
 import java.util.ArrayList;
@@ -39,6 +41,8 @@ public class CartListActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ArrayList<SanPham> dataCart = new ArrayList<>();
+        dataCart = CartOfUser.CartUser;
         setControl();
         setEvent();
     }
