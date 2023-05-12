@@ -16,6 +16,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gearshop.ui.cart.CartItem;
+import com.example.gearshop.ui.cart.CartOfUser;
 import com.example.gearshop.ui.giohang.CartListActivity;
 import com.example.gearshop.R;
 import com.example.gearshop.ui.model.Image_Adapter;
@@ -29,6 +31,7 @@ public class ChiTietSanPham extends AppCompatActivity {
     Button btnThemVaoGioHang;
     ImageButton btnCong, btnTru;
     Toolbar toolbar;
+    SanPham sp;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main_drawer, menu);
@@ -62,6 +65,16 @@ public class ChiTietSanPham extends AppCompatActivity {
         btnThemVaoGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CartItem cartItem = new CartItem();
+//                cartItem.setImg(sp.getHinhAnh1());
+                cartItem.setName(sp.getTenSP());
+
+//                cartItem.setAmout(sp.getSLSP); // chỗ này cần viết 1 cái rule thêm sản phẩm vào giỏ hàng
+//                Nếu sp chưa có thì thêm mới vào list nếu sp đã có thì tăng số lượng
+//                ds giỏ hàng dùng một số field khác như số lượng tổng giá nên dùng cái class CartItem mà lưu
+//                CartOfUser.globalCart.add(cartItem);
+
+                CartOfUser.CartUser.add(sp);
                 Intent intent = new Intent(ChiTietSanPham.this, CartListActivity.class);
                 ChiTietSanPham.this.startActivity(intent);
             }
@@ -94,7 +107,7 @@ public class ChiTietSanPham extends AppCompatActivity {
             return;
         }
         DecimalFormat formatter = new DecimalFormat("###,###,###.##");
-        SanPham sp = (SanPham) bundle.get("san_pham");
+        sp = (SanPham) bundle.get("san_pham");
         String giaSP = formatter.format(sp.getGiaSP())+" VNĐ";
         tvGiaCTSP.setText(giaSP);
         tvTenChiTietSP.setText(sp.getTenSP());

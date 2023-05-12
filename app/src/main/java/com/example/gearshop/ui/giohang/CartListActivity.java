@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.example.gearshop.R;
 import com.example.gearshop.ui.cart.CartArrayAdapter;
 import com.example.gearshop.ui.cart.CartItem;
+import com.example.gearshop.ui.cart.CartOfUser;
+import com.example.gearshop.ui.model.SanPham;
 import com.example.gearshop.ui.orderHistory.CustomCartArrayAdapter;
 
 import java.util.ArrayList;
@@ -26,11 +28,13 @@ import java.util.ArrayList;
 public class CartListActivity extends AppCompatActivity {
     Toolbar toolbar;
     Button btnThanhToanHoaDon;
-    TextView tongTientxt, numberItemTxt;
+    public static TextView tongTientxt, numberItemTxt;
     public static  ArrayList<CartItem> cartItemsList;
     CustomCartArrayAdapter CustomCartArrayAdapter;
     ListView lv;
     ImageButton minusCartBtn, plusCartBtn;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,8 @@ public class CartListActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ArrayList<SanPham> dataCart = new ArrayList<>();
+        dataCart = CartOfUser.CartUser;
         setControl();
         setEvent();
     }
@@ -77,7 +83,7 @@ public class CartListActivity extends AppCompatActivity {
         cartItemsList = new ArrayList<>();
 
         cartItemsList.add(new CartItem(R.drawable.baseline_logout_24, "sản phẩm 1", 123, 2123, 1));
-        cartItemsList.add(new CartItem(R.drawable.baseline_logout_24, "sản phẩm 2", 1223, 21323, 12));
+        cartItemsList.add(new CartItem(R.drawable.baseline_logout_24, "sản phẩm 2", 122223, 21323, 12));
 
         return cartItemsList;
     }
@@ -86,16 +92,12 @@ public class CartListActivity extends AppCompatActivity {
         minusCartBtn = findViewById(R.id.minusCartBtn);
         plusCartBtn = findViewById(R.id.plusCartBtn);
         numberItemTxt = findViewById(R.id.numberItemTxt);
-
         tongTientxt = findViewById(R.id.totalPriceTxt);
+
         cartItemsList = createMockup();
 
-        int total = 0;
-        for (int i = 0; i < cartItemsList.size(); i++) {
-            total+= (cartItemsList.get(i).getInitPrice() * cartItemsList.get(i).getAmout());
-        }
-        tongTientxt.setText(String.format("%,d",total));
 
+        tinhTongTien(cartItemsList);
         lv = findViewById(R.id.CartLV);
 
         CustomCartArrayAdapter = new CustomCartArrayAdapter(CartListActivity.this, cartItemsList);
@@ -106,6 +108,7 @@ public class CartListActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -114,5 +117,14 @@ public class CartListActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static void tinhTongTien(ArrayList<CartItem> cartItemsList) {
+
+        int total = 0;
+        for (int i = 0; i < cartItemsList.size(); i++) {
+            total+= (cartItemsList.get(i).getInitPrice() * cartItemsList.get(i).getAmout());
+        }
+        tongTientxt.setText(String.format("%,d",total));
     }
 }

@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.gearshop.R;
 import com.example.gearshop.ui.cart.CartArrayAdapter;
 import com.example.gearshop.ui.cart.CartItem;
+import com.example.gearshop.ui.cart.CartOfUser;
 import com.example.gearshop.ui.orderHistory.CustomCartArrayAdapter;
 
 import java.util.ArrayList;
@@ -22,10 +24,11 @@ import java.util.ArrayList;
 public class OrderListActivity extends AppCompatActivity {
     Button btnDatHang;
     Toolbar toolbar;
-    TextView totalPriceNoShipTxt, shipPriceTxt, totalPriceTxt;
+    TextView totalPriceNoShipTxt, shipPriceTxt, totalPriceTxt, addressTxt;
     ArrayList<CartItem> cartItemsList;
     CustomCartArrayAdapter cartArrayAdapter;
     ListView lv;
+    ImageButton addressBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,13 @@ public class OrderListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(OrderListActivity.this, OrderHistoryActivity.class);
+                OrderListActivity.this.startActivity(intent);
+            }
+        });
+        addressBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OrderListActivity.this, AddressActivity.class);
                 OrderListActivity.this.startActivity(intent);
             }
         });
@@ -67,9 +77,14 @@ public class OrderListActivity extends AppCompatActivity {
 
     private void setControl() {
         btnDatHang = findViewById(R.id.btnDatHang);
+        addressBtn = findViewById(R.id.addressBtn);
+        addressTxt = findViewById(R.id.addressTxt);
+
         totalPriceNoShipTxt = findViewById(R.id.totalPriceNoShipTxt);
         shipPriceTxt= findViewById(R.id.shipPriceTxt);
         totalPriceTxt = findViewById(R.id.orderHistoryTotalPriceTxt);
+
+
 
         lv = findViewById(R.id.orderLv);
         cartItemsList = createMockup();
@@ -81,6 +96,12 @@ public class OrderListActivity extends AppCompatActivity {
         totalPriceNoShipTxt.setText(String.format("%,d",total));
         shipPriceTxt.setText("25,000");
         totalPriceTxt.setText((String.format("%,d", total + 25000)));
+        if(CartOfUser.customerAddress != null) {
+            System.out.println("CartOfUser.customerAddress.getAddress() " + CartOfUser.customerAddress.getAddress() );
+
+                    addressTxt.setText(CartOfUser.customerAddress.getAddress().toString());
+
+        }
 
         cartArrayAdapter = new CustomCartArrayAdapter(OrderListActivity.this,  CartListActivity.cartItemsList);
 
