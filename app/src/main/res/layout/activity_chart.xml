@@ -6,17 +6,17 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="10dp"
-    tools:context=".ActivityQuanLySanPham">
+    tools:context=".ui.Chart.ChartActivity">
 
     <Button
-        android:id="@+id/btnQuanliSP"
+        android:id="@+id/btnYearChartBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Quản lí sản phẩm"/>
+        android:text="Thống kê theo các năm"/>
 
     <Button
-        android:id="@+id/btnThongke"
+        android:id="@+id/btnMonthChartBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thống kê"/>
+        android:text="Thống kê theo tháng"/>
 </LinearLayout>

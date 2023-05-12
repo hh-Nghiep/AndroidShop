@@ -15,9 +15,6 @@
         android:theme="@style/Theme.GearShop"
         tools:targetApi="31">
         <activity
-            android:name=".ui.giohang.AddressActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.giohang.OrderHistoryActivity"
             android:exported="false" />
         <activity
@@ -36,13 +33,25 @@
             android:name=".ui.giohang.CartListActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.Chart.ChartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Chart.ChartYeahActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Chart.ChartMonthActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Quanli.ItemListActivity"
+            android:exported="false" />
+        <activity
             android:name=".ActivityQuanLySanPham"
             android:exported="false" />
         <activity
-            android:name=".UpdateActivity"
+            android:name=".ui.Quanli.UpdateActivity"
             android:exported="false" />
         <activity
-            android:name=".Them_SP"
+            android:name=".ui.Quanli.Them_SP"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
