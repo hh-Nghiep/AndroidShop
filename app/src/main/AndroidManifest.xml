@@ -54,6 +54,9 @@
             android:name=".ui.Quanli.Them_SP"
             android:exported="false" />
         <activity
+            android:name=".ui.giohang.AddressActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label=""

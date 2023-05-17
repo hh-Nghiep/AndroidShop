@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gearshop.R;
 import com.example.gearshop.ui.cart.CartItem;
 import com.example.gearshop.ui.giohang.CartListActivity;
+import com.example.gearshop.ui.giohang.OrderListActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -26,9 +28,11 @@ public class CustomCartArrayAdapter extends BaseAdapter {
 
     ArrayList<CartItem> cartItemsList;
 
-    public CustomCartArrayAdapter(Activity context, ArrayList<CartItem> cartItemsList) {
+    String key;
+    public CustomCartArrayAdapter(Activity context, ArrayList<CartItem> cartItemsList, String key) {
         this.context = context;
         this.cartItemsList = cartItemsList;
+        this.key = key;
     }
 // hien thi du lieu
 
@@ -77,7 +81,15 @@ public class CustomCartArrayAdapter extends BaseAdapter {
 
 
         CartItem item = (CartItem) getItem(position);
-        viewHolder.picCart.setImageResource(item.getImg());
+
+        if(item.getImg().length() > 32){
+            Picasso.get()
+                    .load("https://drive.google.com/uc?id=" + item.getImg().substring(32,item.getImg().lastIndexOf('/')))
+                    .into(viewHolder.picCart);
+        }else{
+            viewHolder.picCart.setImageResource(R.drawable.baseline_help_center_24);
+        }
+//        viewHolder.picCart.setImageResource(item.getImg());
         viewHolder.cartItemTitleTxt.setText(item.getName());
         viewHolder.priceEachItem.setText(String.format("%,d",item.getInitPrice()));
         viewHolder.priceTotalItem.setText(String.format("%,d",item.getTotalPrice()));
@@ -95,6 +107,10 @@ public class CustomCartArrayAdapter extends BaseAdapter {
                 finalViewHolder.priceTotalItem.setText(String.format("%,d",giaTongMoi));
                 CartListActivity.tinhTongTien(CartListActivity.cartItemsList);
                 finalViewHolder.numberItemTxt.setText(String.valueOf(slmoinhat));
+                if (key == "order"){
+                    OrderListActivity.tongTienThanhToan(CartListActivity.cartItemsList);
+
+                }
             }
         });
 
@@ -109,6 +125,11 @@ public class CustomCartArrayAdapter extends BaseAdapter {
                     CartListActivity.cartItemsList.get(position).setTotalPrice(giaTongMoi);
                     finalViewHolder.priceTotalItem.setText(String.format("%,d",giaTongMoi));
                     finalViewHolder.numberItemTxt.setText(String.valueOf(slhtai));
+                    CartListActivity.tinhTongTien(CartListActivity.cartItemsList);
+                    if (key == "order"){
+                        OrderListActivity.tongTienThanhToan(CartListActivity.cartItemsList);
+
+                    }
                 }
 
             }
