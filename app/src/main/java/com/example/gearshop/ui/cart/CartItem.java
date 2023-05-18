@@ -1,13 +1,13 @@
 package com.example.gearshop.ui.cart;
 
 public class CartItem {
-    private int img;
+    private String img;
     private String name;
     private int initPrice;
     private int totalPrice;
     private int amout;
 
-    public int getImg() {
+    public String getImg() {
         return img;
     }
 
@@ -27,7 +27,7 @@ public class CartItem {
         return amout;
     }
 
-    public void setImg(int img) {
+    public void setImg(String img) {
         this.img = img;
     }
 
@@ -50,7 +50,7 @@ public class CartItem {
     public CartItem() {
     }
 
-    public CartItem(int img, String name, int initPrice, int totalPrice, int amout) {
+    public CartItem(String img, String name, int initPrice, int totalPrice, int amout) {
         this.img = img;
         this.name = name;
         this.initPrice = initPrice;

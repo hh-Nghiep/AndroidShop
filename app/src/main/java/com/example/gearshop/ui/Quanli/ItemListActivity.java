@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.gearshop.R;
 
 
+
 import java.util.ArrayList;
 
 public class ItemListActivity extends AppCompatActivity {
