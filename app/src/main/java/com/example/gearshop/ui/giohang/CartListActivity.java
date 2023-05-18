@@ -20,6 +20,7 @@ import com.example.gearshop.R;
 import com.example.gearshop.ui.cart.CartArrayAdapter;
 import com.example.gearshop.ui.cart.CartItem;
 import com.example.gearshop.ui.cart.CartOfUser;
+import com.example.gearshop.ui.cart.ListItemCart;
 import com.example.gearshop.ui.model.SanPham;
 import com.example.gearshop.ui.orderHistory.CustomCartArrayAdapter;
 
@@ -30,6 +31,8 @@ public class CartListActivity extends AppCompatActivity {
     Button btnThanhToanHoaDon;
     public static TextView tongTientxt, numberItemTxt;
     public static  ArrayList<CartItem> cartItemsList;
+
+    ListItemCart listItemCart = new ListItemCart();
     CustomCartArrayAdapter CustomCartArrayAdapter;
     ListView lv;
     ImageButton minusCartBtn, plusCartBtn;
@@ -95,15 +98,16 @@ public class CartListActivity extends AppCompatActivity {
 
         return cartItemsList;
     }
+
     private void setControl() {
         btnThanhToanHoaDon = findViewById(R.id.btnThanhToanHoaDon);
         minusCartBtn = findViewById(R.id.minusCartBtn);
         plusCartBtn = findViewById(R.id.plusCartBtn);
         numberItemTxt = findViewById(R.id.numberItemTxt);
         tongTientxt = findViewById(R.id.totalPriceTxt);
+        cartItemsList = new ArrayList<>();
 
-        cartItemsList = createMockup();
-
+        cartItemsList = CartOfUser.globalCart;
 
         tinhTongTien(cartItemsList);
         lv = findViewById(R.id.CartLV);

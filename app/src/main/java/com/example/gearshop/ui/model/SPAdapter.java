@@ -2,6 +2,7 @@ package com.example.gearshop.ui.model;
 
 import android.content.Context;
 import android.content.Intent;
+import android.icu.text.DecimalFormat;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,8 +43,12 @@ public class SPAdapter extends RecyclerView.Adapter<SPAdapter.SPAdapterHolder>{
             return;
         }
         holder.tvTenSP.setText(sp.getTenSP());
-        holder.tvGiaSP.setText(sp.getGiaSP().toString());
-        holder.tvThuongHieuSP.setText(sp.getMaTH().toString());
+
+        DecimalFormat formatter = new DecimalFormat("###,###,###.##");
+        String giaSP = formatter.format(sp.getGiaSP())+" VNĐ";
+
+        holder.tvGiaSP.setText(giaSP);
+        holder.tvThuongHieuSP.setText(sp.getMaTH());
         if(sp.getHinhAnh1().length() > 32){
             Picasso.get()
                     .load("https://drive.google.com/uc?id=" + sp.getHinhAnh1().substring(32,sp.getHinhAnh1().lastIndexOf('/')))
@@ -93,6 +98,5 @@ public class SPAdapter extends RecyclerView.Adapter<SPAdapter.SPAdapterHolder>{
             ivSanPham = itemView.findViewById(R.id.ivSanPham);
             llSanPham = itemView.findViewById(R.id.llSanPham);
         }
-
     }
 }

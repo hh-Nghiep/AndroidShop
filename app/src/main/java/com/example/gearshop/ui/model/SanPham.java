@@ -3,9 +3,8 @@ package com.example.gearshop.ui.model;
 import java.io.Serializable;
 
 public class SanPham implements Serializable {
-    String tenSP, mieuTaSP, hinhAnh1, hinhAnh2, hinhAnh3;
-    Integer maSP, maTL, maTH;
-    Float giaSP;
+    String tenSP, mieuTaSP, hinhAnh1, hinhAnh2, hinhAnh3, maTH;
+    Integer maSP, maTL, soLuong, giaSP;
 
     @Override
     public String toString() {
@@ -19,10 +18,11 @@ public class SanPham implements Serializable {
                 ", maTL=" + maTL +
                 ", maTH=" + maTH +
                 ", giaSP=" + giaSP +
+                ", soLuong=" + soLuong +
                 '}';
     }
 
-    public SanPham(Integer maSP, String tenSP, Float giaSP, Integer maTL, Integer maTH, String mieuTaSP, String hinhAnh1, String hinhAnh2, String hinhAnh3) {
+    public SanPham(Integer maSP, String tenSP, Integer giaSP, Integer maTL, String maTH, String mieuTaSP, String hinhAnh1, String hinhAnh2, String hinhAnh3, Integer soLuong) {
         this.tenSP = tenSP;
         this.mieuTaSP = mieuTaSP;
         this.hinhAnh1 = hinhAnh1;
@@ -32,6 +32,7 @@ public class SanPham implements Serializable {
         this.maTL = maTL;
         this.maTH = maTH;
         this.giaSP = giaSP;
+        this.soLuong = soLuong;
     }
 
     public SanPham() {
@@ -94,19 +95,23 @@ public class SanPham implements Serializable {
         this.maTL = maTL;
     }
 
-    public Integer getMaTH() {
+    public String getMaTH() {
         return maTH;
     }
 
-    public void setMaTH(Integer maTH) {
+    public void setMaTH(String maTH) {
         this.maTH = maTH;
     }
 
-    public Float getGiaSP() {
+    public Integer getGiaSP() {
         return giaSP;
     }
 
-    public void setGiaSP(Float giaSP) {
+    public void setGiaSP(Integer giaSP) {
         this.giaSP = giaSP;
     }
+
+    public void setSoLuong(Integer soLuong){this.soLuong = soLuong;}
+
+    public Integer getSoLuong(){return soLuong;}
 }

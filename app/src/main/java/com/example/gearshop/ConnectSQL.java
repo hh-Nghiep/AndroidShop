@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectSQL {
-    String ip = "172.20.10.2";
+    String ip = "192.168.1.10";
     String classs = "net.sourceforge.jtds.jdbc.Driver";
     String db = "gearshop";
     String un = "sa";
