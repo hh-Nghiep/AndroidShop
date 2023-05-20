@@ -17,7 +17,6 @@
         android:orientation="vertical"
         >
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="66dp"
@@ -41,7 +40,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/editHoTen"
+                android:id="@+id/etTenNguoiDung"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/baseline_person_24"
@@ -50,16 +49,7 @@
                 android:textSize="24sp" />
 
             <EditText
-                android:id="@+id/editUsername"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/baseline_person_pin_24"
-                android:text="NVA"
-                android:textAlignment="center"
-                android:textSize="24sp" />
-
-            <EditText
-                android:id="@+id/editEmail"
+                android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/baseline_email_24"
@@ -68,7 +58,16 @@
                 android:textSize="24sp" />
 
             <EditText
-                android:id="@+id/editSDT"
+                android:id="@+id/etCMND"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/baseline_person_pin_24"
+                android:text="364095347"
+                android:textAlignment="center"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/etSDT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/baseline_local_phone_24"
@@ -76,26 +75,9 @@
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
-            <EditText
-                android:id="@+id/editGioiTinh"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/baseline_man_24"
-                android:text="Nam"
-                android:textAlignment="center"
-                android:textSize="24sp" />
 
             <EditText
-                android:id="@+id/editNgaySinh"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/baseline_calendar_today_24"
-                android:text="01/01/2000"
-                android:textAlignment="center"
-                android:textSize="24sp" />
-
-            <EditText
-                android:id="@+id/editDiaChi"
+                android:id="@+id/etDiaChi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/baseline_home_24"
@@ -104,7 +86,7 @@
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/btnLuu"
+                android:id="@+id/btnLuuThongTinNguoiDung"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="200dp"
