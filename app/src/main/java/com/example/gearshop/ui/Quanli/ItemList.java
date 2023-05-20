@@ -6,15 +6,18 @@ public class ItemList {
     String name, mieuTaSP, hinh1, hinh2, hinh3;
 
     Integer maSP, maTL, maTH;
-    int price;
+    Float price;
 
-    public ItemList(int image, String name, Integer maSP, Integer maTL, Integer maTH, int price) {
-        this.image = image;
-        this.name = name;
+    public ItemList(Integer maSP, String name, Float price,  Integer maTL, Integer maTH, String mieuTaSP, String hinh1, String hinh2, String hinh3) {
         this.maSP = maSP;
-        this.maTH = maTL;
-        this.maTH = maTH;
+        this.name = name;
         this.price = price;
+        this.maTL = maTL;
+        this.maTH = maTH;
+        this.mieuTaSP = mieuTaSP;
+        this.hinh1 = hinh1;
+        this.hinh2 = hinh2;
+        this.hinh3 = hinh3;
     }
 
     @Override
@@ -31,19 +34,6 @@ public class ItemList {
                 ", maTH=" + maTH +
                 ", price=" + price +
                 '}';
-    }
-
-    public ItemList(int image, String name, String mieuTaSP, String hinh1, String hinh2, String hinh3, Integer maSP, Integer maTL, Integer maTH, int price) {
-        this.image = image;
-        this.name = name;
-        this.mieuTaSP = mieuTaSP;
-        this.hinh1 = hinh1;
-        this.hinh2 = hinh2;
-        this.hinh3 = hinh3;
-        this.maSP = maSP;
-        this.maTL = maTL;
-        this.maTH = maTH;
-        this.price = price;
     }
 
     public String getMieuTaSP() {
@@ -118,11 +108,11 @@ public class ItemList {
         this.name = name;
     }
 
-    public int getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 }

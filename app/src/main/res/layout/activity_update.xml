@@ -16,8 +16,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:layout_width="match_parent"
@@ -34,10 +33,10 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="6dp"
             android:layout_marginEnd="16dp"
+            android:focusable="false"
             android:ems="10"
             android:hint="Mã sản phẩm"
             android:inputType="number" />
-
         <EditText
             android:id="@+id/editTenSP"
             android:layout_width="wrap_content"
@@ -46,7 +45,6 @@
             android:layout_marginTop="6dp"
             android:layout_marginEnd="16dp"
             android:ems="10"
-            android:inputType="textPersonName"
             android:hint="Tên sản phẩm"/>
 
         <EditText
@@ -68,7 +66,7 @@
             android:layout_marginTop="6dp"
             android:layout_marginEnd="16dp"
             android:ems="10"
-            android:inputType="numberDecimal"
+            android:inputType="number"
             android:hint="Thương hiệu"/>
 
         <EditText

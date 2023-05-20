@@ -2,16 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_weight="1"
-    >
+    android:layout_weight="1">
 
-    <EditText
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:hint="Tìm kiếm"
-        android:id="@+id/editHoTen"
-        />
+<!--    <EditText-->
+<!--        android:layout_width="220dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Tìm kiếm"-->
+<!--        android:id="@+id/editSearch"-->
+<!--        />-->
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchName"
+            app:queryHint="Tìm kiếm"
+            app:iconifiedByDefault="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
 <!--    <Spinner-->
 <!--        android:layout_width="150dp"-->
 <!--        android:layout_height="wrap_content" />-->
@@ -19,19 +27,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="right">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thêm"
-            android:id="@+id/btnAdd"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cập nhật"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:id="@+id/btnEdit"/>
+            android:id="@+id/btnAdd"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="2dp"/>
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Cập nhật"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:id="@+id/btnEdit"/>-->
 <!--        <Button-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->

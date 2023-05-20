@@ -4,8 +4,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,16 +32,55 @@ public class UpdateActivity extends AppCompatActivity {
     TextInputEditText editDesc;
     Button btnUpdate, btnXoa, btnHuy;
     AlertDialog.Builder dialog;
+    ArrayAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
-
         setControl();
+
+        Intent intent = getIntent();
+        String maSP = intent.getStringExtra("MaSP");
+        String tenSP = intent.getStringExtra("TenSP");
+        String maTL = intent.getStringExtra("MaTL");
+        String maTH = intent.getStringExtra("MaTH");
+        String price = intent.getStringExtra("Price");
+        String desc = intent.getStringExtra("Desc");
+        String Hinh1 = intent.getStringExtra("Hinh1");
+        String Hinh2 = intent.getStringExtra("Hinh2");
+        String Hinh3 = intent.getStringExtra("Hinh3");
+
+        editMaSP.setText(maSP);
+        editTenSP.setText(tenSP);
+        editMaTL.setText(maTL);
+        editMaTH.setText(maTH);
+        editPrice.setText(price);
+        editDesc.setText(desc);
+        etHinh1.setText(Hinh1);
+        etHinh2.setText(Hinh2);
+        etHinh3.setText(Hinh3);
+
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CapNhatDL();
+                Toast.makeText(UpdateActivity.this, "Thay đổi thành công", Toast.LENGTH_SHORT).show();
+                finish();
+//                dialog.setTitle("Thông báo").setMessage("Xác nhận").setCancelable(true)
+//                        .setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                CapNhatDL();
+//                                Toast.makeText(UpdateActivity.this, "Thay đổi thành công", Toast.LENGTH_SHORT).show();
+//                                finish();
+//                            }
+//                        })
+//                        .setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                dialogInterface.cancel();
+//                            }
+//                        }).show();
             }
         });
 
@@ -47,13 +88,30 @@ public class UpdateActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 XoaDL();
+                Toast.makeText(UpdateActivity.this, "Xoá thành công", Toast.LENGTH_SHORT).show();
+                finish();
+//                dialog.setTitle("Thông báo").setMessage("Xác nhận").setCancelable(true)
+//                        .setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                CapNhatDL();
+//                                Toast.makeText(UpdateActivity.this, "Thay đổi thành công", Toast.LENGTH_SHORT).show();
+//                                finish();
+//                            }
+//                        })
+//                        .setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                dialogInterface.cancel();
+//                            }
+//                        }).show();
             }
         });
 
         btnHuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ItemListActivity.class));
+                finish();
             }
         });
     }
@@ -115,4 +173,5 @@ public class UpdateActivity extends AppCompatActivity {
         etHinh2 = findViewById(R.id.etHinh2);
         etHinh3 = findViewById(R.id.etHinh3);
     }
+
 }

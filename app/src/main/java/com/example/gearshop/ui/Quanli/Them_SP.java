@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.textservice.TextInfo;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -25,6 +26,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import android.widget.Toast;
+
 
 public class Them_SP extends AppCompatActivity {
 
@@ -42,6 +45,7 @@ public class Them_SP extends AppCompatActivity {
     TextInputEditText edtDesc;
 
     AlertDialog.Builder dialog;
+    ArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
@@ -52,26 +56,33 @@ public class Them_SP extends AppCompatActivity {
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.setTitle("Thông báo").setMessage("Xác nhận").setCancelable(true)
-                                .setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        ThemDL();
-                                    }
-                                })
-                        .setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.cancel();
-                            }
-                        }).show();
+                ThemDL();
+//              adapter.notifyDataSetChanged();
+                Toast.makeText(getApplicationContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                finish();
+//                dialog.setTitle("Thông báo").setMessage("Xác nhận").setCancelable(true)
+//                                .setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialogInterface, int i) {
+//                                        ThemDL();
+////                                        adapter.notifyDataSetChanged();
+//                                        Toast.makeText(getApplicationContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+//                                        finish();
+//                                    }
+//                                })
+//                        .setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                dialogInterface.cancel();
+//                            }
+//                        }).show();
 
             }
         });
         btnHuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ItemListActivity.class));
+                finish();
             }
         });
     }

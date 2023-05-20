@@ -13,7 +13,8 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import com.example.gearshop.R;
-
+import com.example.gearshop.ui.model.SanPham;
+import com.squareup.picasso.Picasso;
 
 public class ItemListAdapter extends ArrayAdapter<ItemList> {
     private Context mContex;
@@ -38,16 +39,20 @@ public class ItemListAdapter extends ArrayAdapter<ItemList> {
 
         TextView txtGia = convertView.findViewById(R.id.txtGia);
 
-        imageView.setImageResource(getItem(position).getImage());
 
+//        imageView.setImageResource(getItem(position).getImage());
+        if(getItem(position).getHinh1().length() > 32){
+            Picasso.get()
+                    .load("https://drive.google.com/uc?id=" + getItem(position).getHinh1().substring(32,getItem(position).getHinh1().lastIndexOf('/')))
+                    .into(imageView);
+        }else{
+            imageView.setImageResource(R.drawable.baseline_help_center_24);
+        }
         txtName.setText(getItem(position).getName());
 
-        txtGia.setText((String.format("%,d",getItem(position).getPrice())));
+        txtGia.setText(getItem(position).getPrice().toString());
 
         return convertView;
     }
-
-
-
 
 }
