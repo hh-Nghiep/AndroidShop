@@ -81,17 +81,9 @@ public class CartListActivity extends AppCompatActivity {
     }
     private ArrayList<CartItem> createMockup () {
         cartItemsList = new ArrayList<>();
-        String img1 = "https://drive.google.com/file/d/1zM6-e3FuDZGeQbCCjcarb1wJ65_Dki8A/view?usp=sharing";
-        String img2 = "https://drive.google.com/file/d/1njPEQmMEGokZ0gJUN3VYFtNEgr5RviLD/view?usp=share_link";
 
-        cartItemsList.add(new CartItem(img1, "sản phẩm 1", 123, 2123, 1));
-        cartItemsList.add(new CartItem(img2, "sản phẩm 2", 122223, 21323, 12));
-
-        int tong1 = cartItemsList.get(0).getAmout() * cartItemsList.get(0).getInitPrice();
-        cartItemsList.get(0).setTotalPrice(tong1);
-
-        int tong2 = cartItemsList.get(1).getAmout() * cartItemsList.get(1).getInitPrice();
-        cartItemsList.get(1).setTotalPrice(tong2);
+        cartItemsList.add(new CartItem(R.drawable.baseline_logout_24, "sản phẩm 1", 123, 2123, 1));
+        cartItemsList.add(new CartItem(R.drawable.baseline_logout_24, "sản phẩm 2", 122223, 21323, 12));
 
         return cartItemsList;
     }
@@ -108,7 +100,7 @@ public class CartListActivity extends AppCompatActivity {
         tinhTongTien(cartItemsList);
         lv = findViewById(R.id.CartLV);
 
-        CustomCartArrayAdapter = new CustomCartArrayAdapter(CartListActivity.this, cartItemsList, "cart");
+        CustomCartArrayAdapter = new CustomCartArrayAdapter(CartListActivity.this, cartItemsList);
 
         lv.setAdapter(CustomCartArrayAdapter);
 

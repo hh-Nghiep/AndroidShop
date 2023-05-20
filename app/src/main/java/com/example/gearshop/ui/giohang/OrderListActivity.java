@@ -24,10 +24,7 @@ import java.util.ArrayList;
 public class OrderListActivity extends AppCompatActivity {
     Button btnDatHang;
     Toolbar toolbar;
-    static TextView totalPriceNoShipTxt;
-    static TextView shipPriceTxt;
-    static TextView totalPriceTxt;
-    TextView addressTxt;
+    TextView totalPriceNoShipTxt, shipPriceTxt, totalPriceTxt, addressTxt;
     ArrayList<CartItem> cartItemsList;
     CustomCartArrayAdapter cartArrayAdapter;
     ListView lv;
@@ -62,11 +59,9 @@ public class OrderListActivity extends AppCompatActivity {
     }
     private ArrayList<CartItem> createMockup () {
         cartItemsList = new ArrayList<>();
-        String img1 = "https://drive.google.com/file/d/1zM6-e3FuDZGeQbCCjcarb1wJ65_Dki8A/view?usp=sharing";
-        String img2 = "https://drive.google.com/file/d/1njPEQmMEGokZ0gJUN3VYFtNEgr5RviLD/view?usp=share_link";
 
-        cartItemsList.add(new CartItem(img1, "sản phẩm 1", 123, 2123, 1));
-        cartItemsList.add(new CartItem(img2, "sản phẩm 2", 1223, 21323, 12));
+        cartItemsList.add(new CartItem(R.drawable.baseline_logout_24, "sản phẩm 1", 123, 2123, 1));
+        cartItemsList.add(new CartItem(R.drawable.baseline_logout_24, "sản phẩm 2", 1223, 21323, 12));
 
         return cartItemsList;
     }
@@ -89,31 +84,27 @@ public class OrderListActivity extends AppCompatActivity {
         shipPriceTxt= findViewById(R.id.shipPriceTxt);
         totalPriceTxt = findViewById(R.id.orderHistoryTotalPriceTxt);
 
-        tongTienThanhToan(CartListActivity.cartItemsList);
+
 
         lv = findViewById(R.id.orderLv);
         cartItemsList = createMockup();
-        if(CartOfUser.customerAddress != null) {
-            System.out.println("CartOfUser.customerAddress.getAddress() " + CartOfUser.customerAddress.getAddress() );
 
-            addressTxt.setText(CartOfUser.customerAddress.getAddress().toString());
-
-        }
-
-
-        cartArrayAdapter = new CustomCartArrayAdapter(OrderListActivity.this,  CartListActivity.cartItemsList, "order");
-
-
-        lv.setAdapter(cartArrayAdapter);
-    }
-
-    public static void tongTienThanhToan (ArrayList<CartItem> cartItemsList) {
         int total = 0;
-        for (int i = 0; i < cartItemsList.size(); i++) {
-            total+= (cartItemsList.get(i).getInitPrice() * cartItemsList.get(i).getAmout());
+        for (int i = 0; i < CartListActivity.cartItemsList.size(); i++) {
+            total+= (CartListActivity.cartItemsList.get(i).getInitPrice() * CartListActivity.cartItemsList.get(i).getAmout());
         }
         totalPriceNoShipTxt.setText(String.format("%,d",total));
         shipPriceTxt.setText("25,000");
         totalPriceTxt.setText((String.format("%,d", total + 25000)));
+        if(CartOfUser.customerAddress != null) {
+            System.out.println("CartOfUser.customerAddress.getAddress() " + CartOfUser.customerAddress.getAddress() );
+
+                    addressTxt.setText(CartOfUser.customerAddress.getAddress().toString());
+
+        }
+
+        cartArrayAdapter = new CustomCartArrayAdapter(OrderListActivity.this,  CartListActivity.cartItemsList);
+
+        lv.setAdapter(cartArrayAdapter);
     }
 }

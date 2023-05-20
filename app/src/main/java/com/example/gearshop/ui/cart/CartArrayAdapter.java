@@ -92,15 +92,8 @@ public class CartArrayAdapter extends ArrayAdapter<CartItem> {
 ////          }
 //            }
 //        });
-        if(item.getImg().length() > 32){
-            Picasso.get()
-                    .load("https://drive.google.com/uc?id=" + item.getImg().substring(32,item.getImg().lastIndexOf('/')))
-                    .into(cartImg);
-        }else{
-            cartImg.setImageResource(R.drawable.baseline_help_center_24);
-        }
 
-//        cartImg.setImageResource(item.getImg());
+        cartImg.setImageResource(item.getImg());
 
 //        Picasso.get()
 //                .load("https://drive.google.com/uc?id=" + item.getImg().substring(32,item.getImg().lastIndexOf('/')))

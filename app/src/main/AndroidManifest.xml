@@ -15,6 +15,9 @@
         android:theme="@style/Theme.GearShop"
         tools:targetApi="31">
         <activity
+            android:name=".ui.giohang.AddressActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.giohang.OrderHistoryActivity"
             android:exported="false" />
         <activity
@@ -52,9 +55,6 @@
             android:exported="false" />
         <activity
             android:name=".ui.Quanli.Them_SP"
-            android:exported="false" />
-        <activity
-            android:name=".ui.giohang.AddressActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
