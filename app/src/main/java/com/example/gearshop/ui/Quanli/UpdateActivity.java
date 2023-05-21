@@ -63,48 +63,46 @@ public class UpdateActivity extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CapNhatDL();
-                Toast.makeText(UpdateActivity.this, "Thay đổi thành công", Toast.LENGTH_SHORT).show();
-                finish();
-//                dialog.setTitle("Thông báo").setMessage("Xác nhận").setCancelable(true)
-//                        .setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                CapNhatDL();
-//                                Toast.makeText(UpdateActivity.this, "Thay đổi thành công", Toast.LENGTH_SHORT).show();
-//                                finish();
-//                            }
-//                        })
-//                        .setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                dialogInterface.cancel();
-//                            }
-//                        }).show();
+                AlertDialog.Builder dialog = new AlertDialog.Builder(UpdateActivity.this);
+                dialog.setTitle("Thông báo");
+                dialog.setMessage("Xác nhận thay đổi");
+                dialog.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        CapNhatDL();
+                    }
+                });
+                dialog.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                dialog.show();
             }
         });
 
         btnXoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                XoaDL();
-                Toast.makeText(UpdateActivity.this, "Xoá thành công", Toast.LENGTH_SHORT).show();
-                finish();
-//                dialog.setTitle("Thông báo").setMessage("Xác nhận").setCancelable(true)
-//                        .setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                CapNhatDL();
-//                                Toast.makeText(UpdateActivity.this, "Thay đổi thành công", Toast.LENGTH_SHORT).show();
-//                                finish();
-//                            }
-//                        })
-//                        .setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                dialogInterface.cancel();
-//                            }
-//                        }).show();
+                AlertDialog.Builder dialog = new AlertDialog.Builder(UpdateActivity.this);
+                dialog.setTitle("Thông báo");
+                dialog.setMessage("Xác nhận xoá");
+                dialog.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        XoaDL();
+                        Toast.makeText(UpdateActivity.this, "Xoá thành công", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
+                dialog.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                dialog.show();
             }
         });
 
@@ -117,32 +115,42 @@ public class UpdateActivity extends AppCompatActivity {
     }
 
     public void CapNhatDL(){
-        MaSP = Integer.valueOf(editMaSP.getText().toString());
-        TenSP = editTenSP.getText().toString();
-        MaTL = Integer.valueOf(editMaTL.getText().toString());
-        MaTH = Integer.valueOf(editMaTH.getText().toString());
-        GiaSP = Float.valueOf(editPrice.getText().toString());
-        DesSP = editDesc.getText().toString();
-        Hinh1 = etHinh1.getText().toString();
-        Hinh2 = etHinh2.getText().toString();
-        Hinh3 = etHinh3.getText().toString();
-        try {
-            ConnectSQL con = new ConnectSQL();
-            connection = con.CONN();
-            String query = "UPDATE SanPham SET TenSP = ?, GiaSP = ?, MaTL = ?, MaTH = ?, MieuTaSP = ?, HinhAnh1 = ?, HinhAnh2 = ?, HinhAnh3 = ? WHERE MaSP = ?";
-            PreparedStatement stmt = connection.prepareStatement(query);
-            stmt.setString(1, TenSP);
-            stmt.setFloat(2, GiaSP);
-            stmt.setInt(3, MaTL);
-            stmt.setInt(4, MaTH);
-            stmt.setString(5, DesSP);
-            stmt.setString(6, Hinh1);
-            stmt.setString(7, Hinh2);
-            stmt.setString(8, Hinh3);
-            stmt.setInt(9, MaSP);
-            stmt.executeUpdate();
-        }catch (Exception ex){
-            System.err.print(ex.getMessage());
+        if (editTenSP.getText().toString().equals("") || editMaTL.getText().toString().equals("") || editMaTH.getText().toString().equals("") || editPrice.getText().toString().equals("")){
+            editTenSP.setError("Bắc buộc");
+            editMaTL.setError("Bắc buộc");
+            editMaTH.setError("Bắc buộc");
+            editPrice.setError("Bắc buộc");
+        }else
+        {
+            MaSP = Integer.valueOf(editMaSP.getText().toString());
+            TenSP = editTenSP.getText().toString();
+            MaTL = Integer.valueOf(editMaTL.getText().toString());
+            MaTH = Integer.valueOf(editMaTH.getText().toString());
+            GiaSP = Float.valueOf(editPrice.getText().toString());
+            DesSP = editDesc.getText().toString();
+            Hinh1 = etHinh1.getText().toString();
+            Hinh2 = etHinh2.getText().toString();
+            Hinh3 = etHinh3.getText().toString();
+            try {
+                ConnectSQL con = new ConnectSQL();
+                connection = con.CONN();
+                String query = "UPDATE SanPham SET TenSP = ?, GiaSP = ?, MaTL = ?, MaTH = ?, MieuTaSP = ?, HinhAnh1 = ?, HinhAnh2 = ?, HinhAnh3 = ? WHERE MaSP = ?";
+                PreparedStatement stmt = connection.prepareStatement(query);
+                stmt.setString(1, TenSP);
+                stmt.setFloat(2, GiaSP);
+                stmt.setInt(3, MaTL);
+                stmt.setInt(4, MaTH);
+                stmt.setString(5, DesSP);
+                stmt.setString(6, Hinh1);
+                stmt.setString(7, Hinh2);
+                stmt.setString(8, Hinh3);
+                stmt.setInt(9, MaSP);
+                stmt.executeUpdate();
+                Toast.makeText(UpdateActivity.this, "Thay đổi thành công", Toast.LENGTH_SHORT).show();
+                finish();
+            }catch (Exception ex){
+                System.err.print(ex.getMessage());
+            }
         }
     }
 

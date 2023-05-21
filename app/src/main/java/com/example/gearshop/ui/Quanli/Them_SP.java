@@ -56,26 +56,24 @@ public class Them_SP extends AppCompatActivity {
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ThemDL();
+//                ThemDL();
 //              adapter.notifyDataSetChanged();
-                Toast.makeText(getApplicationContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                finish();
-//                dialog.setTitle("Thông báo").setMessage("Xác nhận").setCancelable(true)
-//                                .setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialogInterface, int i) {
-//                                        ThemDL();
-////                                        adapter.notifyDataSetChanged();
+                dialog.setTitle("Thông báo").setMessage("Xác nhận").setCancelable(true)
+                                .setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        ThemDL();
+//                                        adapter.notifyDataSetChanged();
 //                                        Toast.makeText(getApplicationContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
 //                                        finish();
-//                                    }
-//                                })
-//                        .setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                dialogInterface.cancel();
-//                            }
-//                        }).show();
+                                    }
+                                })
+                        .setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        }).show();
 
             }
         });
@@ -89,38 +87,46 @@ public class Them_SP extends AppCompatActivity {
 
 
     public void ThemDL(){
-//        MaSP = Integer.valueOf(edtId.getText().toString());
-        TenSP = edtName.getText().toString();
-        MaTL = Integer.valueOf(edtLoai.getText().toString());
-        MaTH = Integer.valueOf(edtThuonghieu.getText().toString());
-        GiaSP = Float.valueOf(editTextNumber.getText().toString());
-        DesSP = edtDesc.getText().toString();
-        Hinh1 = edtHinh1.getText().toString();
-        Hinh2 = edtHinh2.getText().toString();
-        Hinh3 = edtHinh3.getText().toString();
+        if (edtName.getText().toString().equals("") || edtLoai.getText().toString().equals("") || edtThuonghieu.getText().toString().equals("") || editTextNumber.getText().toString().equals("")){
+            edtName.setError("Bắc buộc");
+            edtLoai.setError("Bắc buộc");
+            edtThuonghieu.setError("Bắc buộc");
+            editTextNumber.setError("Bắc buộc");
+        } else{
+            TenSP = edtName.getText().toString();
+            MaTL = Integer.valueOf(edtLoai.getText().toString());
+            MaTH = Integer.valueOf(edtThuonghieu.getText().toString());
+            GiaSP = Float.valueOf(editTextNumber.getText().toString());
+            DesSP = edtDesc.getText().toString();
+            Hinh1 = edtHinh1.getText().toString();
+            Hinh2 = edtHinh2.getText().toString();
+            Hinh3 = edtHinh3.getText().toString();
 //        System.out.print(MaSP);
-        try {
-            ConnectSQL con = new ConnectSQL();
-            connection = con.CONN();
+            try {
+                ConnectSQL con = new ConnectSQL();
+                connection = con.CONN();
 //            String query = "insert into SanPham(MaSP, TenSP,GiaSP,MaTL,MaTH) values(?,?,?,?,?)" ;
-            String query = "insert into SanPham(TenSP,GiaSP,MaTL,MaTH, MieuTaSP,HinhAnh1,HinhAnh2,HinhAnh3)" +"values(?,?,?,?,?,?,?,?)";
-            PreparedStatement stmt = connection.prepareStatement(query);
+                String query = "insert into SanPham(TenSP,GiaSP,MaTL,MaTH, MieuTaSP,HinhAnh1,HinhAnh2,HinhAnh3)" +"values(?,?,?,?,?,?,?,?)";
+                PreparedStatement stmt = connection.prepareStatement(query);
 //            stmt.setInt(1, Integer.parseInt(edtId.getText().toString()));
 //            stmt.setString(2, edtName.getText().toString());
 //            stmt.setFloat(3, Float.parseFloat(editTextNumber.getText().toString()));
 //            stmt.setInt(4, Integer.parseInt(edtLoai.getText().toString()));
 //            stmt.setInt(5, Integer.parseInt(edtThuonghieu.getText().toString()));
-            stmt.setString(1, TenSP);
-            stmt.setFloat(2, GiaSP);
-            stmt.setInt(3, MaTL);
-            stmt.setInt(4, MaTH);
-            stmt.setString(5, DesSP);
-            stmt.setString(6,Hinh1);
-            stmt.setString(7,Hinh2);
-            stmt.setString(8,Hinh3);
-            stmt.execute();
-        }catch (Exception ex){
-            System.err.print(ex.getMessage());
+                stmt.setString(1, TenSP);
+                stmt.setFloat(2, GiaSP);
+                stmt.setInt(3, MaTL);
+                stmt.setInt(4, MaTH);
+                stmt.setString(5, DesSP);
+                stmt.setString(6,Hinh1);
+                stmt.setString(7,Hinh2);
+                stmt.setString(8,Hinh3);
+                stmt.execute();
+                finish();
+                Toast.makeText(getApplicationContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+            }catch (Exception ex){
+                System.err.print(ex.getMessage());
+            }
         }
     }
     private void setControl(){

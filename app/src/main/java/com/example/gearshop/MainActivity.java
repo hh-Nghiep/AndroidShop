@@ -19,6 +19,7 @@ import com.example.gearshop.ui.banphim.BanPhimFragment;
 import com.example.gearshop.ui.chuot.ChuotFragment;
 import com.example.gearshop.ui.giohang.CartListActivity;
 import com.example.gearshop.ui.home.HomeFragment;
+import com.example.gearshop.ui.Quanli.ItemListActivity;
 import com.example.gearshop.ui.login_register.ui.login.InfoUser;
 import com.example.gearshop.ui.login_register.ui.login.LoginActivity;
 import com.example.gearshop.ui.login_register.ui.login.RegisterActivity;
@@ -113,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 currentFragment = FRAGMENT_HOTRO;
             }
         }else if (id == R.id.nav_quanlysanpham) {
-            Intent intent = new Intent(this, ActivityQuanLySanPham.class);
+            Intent intent = new Intent(this, ItemListActivity.class);
             this.startActivity(intent);
         }
 
