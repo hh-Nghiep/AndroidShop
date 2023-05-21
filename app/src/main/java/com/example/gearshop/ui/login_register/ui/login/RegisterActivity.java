@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gearshop.ConnectSQL;
 import com.example.gearshop.R;
@@ -63,6 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Pattern ptPhone = Pattern.compile(PHONE_REGEX);
                 Pattern ptCMND = Pattern.compile(CMND_REGEX);
                 Pattern ptCCCD = Pattern.compile(CCCD_REGEX);
+                Boolean checkEmail = true, checkSDT = true;
                 if(email.equals("") || matKhau.equals("") ||  tenNguoiDung.equals("") ||  SDT.equals("") ||  CMND.equals("") ||  diaChi.equals("")){
                     tvThongBao.setText("Vui Lòng Điền Đầy Đủ Thông Tin !!!");
                 }else if(ptEmail.matcher(email).matches()){
@@ -76,28 +78,70 @@ public class RegisterActivity extends AppCompatActivity {
                         ConnectSQL con = new ConnectSQL();
                         connection = con.CONN();
                         if(connection != null){
-                            String sql ="INSERT INTO TaiKhoan values (?,?,?,?,?,?,?) ";
-                            try {
-                                PreparedStatement ps = connection.prepareStatement(sql);
-                                ps.setString(1, email);
-                                ps.setString(2, matKhau);
-                                ps.setString(3, tenNguoiDung);
-                                ps.setString(4, SDT);
-                                ps.setString(5, CMND);
-                                ps.setString(6, diaChi);
-                                ps.setString(7, "1");
-                                ps.executeUpdate();
-                                ps.close();
-                                connection.close();
-                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                RegisterActivity.this.startActivity(intent);
-                            } catch (SQLException ex) {
-                                Log.d("err", ex.getMessage());
+                            String query = "select * from TaiKhoan where email = '" + email + "'";
+                            Statement statement = connection.createStatement();
+                            ResultSet rs = statement.executeQuery(query);
+                            while (rs.next()){
+                                checkEmail = false;
                             }
                         }
                     }catch (Exception ex){
-                        Log.d("err", ex.getMessage());
+                        System.err.print(ex.getMessage());
                     }
+
+                    try {
+                        ConnectSQL con = new ConnectSQL();
+                        connection = con.CONN();
+                        if(connection != null){
+                            String query = "select * from TaiKhoan where SoDienThoai = '" + SDT + "'";
+                            Statement statement = connection.createStatement();
+                            ResultSet rs = statement.executeQuery(query);
+                            while (rs.next()){
+                                checkSDT = false;
+                            }
+                        }
+                    }catch (Exception ex){
+                        System.err.print(ex.getMessage());
+                    }
+
+
+                    if(checkEmail && checkSDT){
+                        try {
+                            ConnectSQL con = new ConnectSQL();
+                            connection = con.CONN();
+                            if(connection != null){
+                                String sql ="INSERT INTO TaiKhoan values (?,?,?,?,?,?,?) ";
+                                try {
+                                    PreparedStatement ps = connection.prepareStatement(sql);
+                                    ps.setString(1, email);
+                                    ps.setString(2, matKhau);
+                                    ps.setString(3, tenNguoiDung);
+                                    ps.setString(4, SDT);
+                                    ps.setString(5, CMND);
+                                    ps.setString(6, diaChi);
+                                    ps.setString(7, "1");
+                                    ps.executeUpdate();
+                                    ps.close();
+                                    connection.close();
+                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    RegisterActivity.this.startActivity(intent);
+                                } catch (SQLException ex) {
+                                    Log.d("err", ex.getMessage());
+                                }
+                            }
+                        }catch (Exception ex){
+                            Log.d("err", ex.getMessage());
+                        }
+                    }else{
+                        if(!checkEmail){
+                            Toast.makeText(RegisterActivity.this, "Email đã tồn tại. Vui lòng chọn email khác !!!",Toast.LENGTH_LONG).show();
+                        }
+                        if(!checkSDT){
+                            Toast.makeText(RegisterActivity.this, "SDT đã tồn tại. Vui lòng chọn SDT khác !!!",Toast.LENGTH_LONG).show();
+
+                        }
+                    }
+
                 }
             }
         });
