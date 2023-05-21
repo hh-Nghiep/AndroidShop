@@ -27,7 +27,8 @@ import java.util.ArrayList;
 
 public class ChuotFragment extends Fragment {
     String[] items = {"Corsair", "Dare-u", "Fuhlen", "Logitech",  "Razer"};
-    AutoCompleteTextView autoComplateChuot;
+    AutoCompleteTextView autoComplate;
+    ArrayAdapter<String> adapterItems;
     View view;
 
     SanPham SP = null;
@@ -43,11 +44,10 @@ public class ChuotFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_chuot, container, false);
+        view = inflater.inflate(R.layout.fragment_danh_sach_san_pham, container, false);
         setControl();
         setEvent();
-        autoComplateChuot = view.findViewById(R.id.autoComplete_chuot);
-        autoComplateChuot.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        autoComplate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = adapterView.getItemAtPosition(i).toString();
@@ -64,8 +64,8 @@ public class ChuotFragment extends Fragment {
         rcvSP.setLayoutManager(staggeredGridLayoutManager);
         spAdapter.setListSP(this.getContext(), dataSP);
         rcvSP.setAdapter(spAdapter);
-        //adapter_SP = new CustomAdapter_SP(view.getContext(), R.layout.san_pham, dataSP);
-        //lvDanhSachSP.setAdapter(adapter_SP);
+        adapterItems = new ArrayAdapter<String>(this.getContext(), R.layout.list_item, items);
+        autoComplate.setAdapter(adapterItems);
     }
 
     private void KhoiTao(){
@@ -73,7 +73,7 @@ public class ChuotFragment extends Fragment {
             ConnectSQL con = new ConnectSQL();
             connection = con.CONN();
             if(connection != null){
-                String query = "select * from SanPham";
+                String query = "select * from SanPham where maTL = 1";
                 Statement statement = connection.createStatement();
                 ResultSet rs = statement.executeQuery(query);
                 while (rs.next()){
@@ -93,6 +93,7 @@ public class ChuotFragment extends Fragment {
     private void setControl() {
         lvDanhSachSP = view.findViewById(R.id.lvChuot);
         rcvSP = view.findViewById(R.id.rcvSP);
+        autoComplate = view.findViewById(R.id.autoComplete);
     }
 
     @Override

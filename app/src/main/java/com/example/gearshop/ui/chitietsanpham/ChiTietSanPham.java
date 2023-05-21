@@ -12,9 +12,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gearshop.ui.cart.CartItem;
+import com.example.gearshop.ui.cart.CartOfUser;
 import com.example.gearshop.ui.giohang.CartListActivity;
 import com.example.gearshop.R;
 import com.example.gearshop.ui.model.Image_Adapter;
@@ -25,9 +28,10 @@ public class ChiTietSanPham extends AppCompatActivity {
     ViewPager vpChiTietSanPham;
     Image_Adapter mViewPagerAdapter;
     String[] imageUrls;
-    Button btnThemVaoGioHang, btnCong, btnTru;
-
+    Button btnThemVaoGioHang;
+    ImageButton btnCong, btnTru;
     Toolbar toolbar;
+    SanPham sp;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main_drawer, menu);
@@ -61,6 +65,16 @@ public class ChiTietSanPham extends AppCompatActivity {
         btnThemVaoGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CartItem cartItem = new CartItem();
+//                cartItem.setImg(sp.getHinhAnh1());
+                cartItem.setName(sp.getTenSP());
+
+//                cartItem.setAmout(sp.getSLSP); // chỗ này cần viết 1 cái rule thêm sản phẩm vào giỏ hàng
+//                Nếu sp chưa có thì thêm mới vào list nếu sp đã có thì tăng số lượng
+//                ds giỏ hàng dùng một số field khác như số lượng tổng giá nên dùng cái class CartItem mà lưu
+//                CartOfUser.globalCart.add(cartItem);
+
+                CartOfUser.CartUser.add(sp);
                 Intent intent = new Intent(ChiTietSanPham.this, CartListActivity.class);
                 ChiTietSanPham.this.startActivity(intent);
             }
@@ -93,18 +107,22 @@ public class ChiTietSanPham extends AppCompatActivity {
             return;
         }
         DecimalFormat formatter = new DecimalFormat("###,###,###.##");
-        SanPham sp = (SanPham) bundle.get("san_pham");
+        sp = (SanPham) bundle.get("san_pham");
         String giaSP = formatter.format(sp.getGiaSP())+" VNĐ";
         tvGiaCTSP.setText(giaSP);
         tvTenChiTietSP.setText(sp.getTenSP());
         tvChiTietSP.setText(sp.getMieuTaSP());
 
-
-        imageUrls = new String[]{
-                "https://drive.google.com/uc?id=" + sp.getHinhAnh1().substring(32,sp.getHinhAnh1().lastIndexOf('/')),
-                "https://drive.google.com/uc?id=" + sp.getHinhAnh2().substring(32,sp.getHinhAnh2().lastIndexOf('/')),
-                "https://drive.google.com/uc?id=" + sp.getHinhAnh3().substring(32,sp.getHinhAnh3().lastIndexOf('/'))
-        };
+        imageUrls = new String[3];
+        if(sp.getHinhAnh1().length() > 32){
+            imageUrls[0] = "https://drive.google.com/uc?id=" + sp.getHinhAnh1().substring(32,sp.getHinhAnh1().lastIndexOf('/'));
+        }
+        if(sp.getHinhAnh2().length() > 32){
+            imageUrls[1] = "https://drive.google.com/uc?id=" + sp.getHinhAnh2().substring(32,sp.getHinhAnh2().lastIndexOf('/'));
+        }
+        if(sp.getHinhAnh3().length() > 32){
+            imageUrls[2] = "https://drive.google.com/uc?id=" + sp.getHinhAnh3().substring(32,sp.getHinhAnh1().lastIndexOf('/'));
+        }
         // Initializing the ViewPagerAdapter
         mViewPagerAdapter = new Image_Adapter(ChiTietSanPham.this, imageUrls);
 
@@ -122,6 +140,4 @@ public class ChiTietSanPham extends AppCompatActivity {
         btnCong = findViewById(R.id.btnCongSoLuongCTSP);
         btnTru = findViewById(R.id.btnTruSoLuongCTSP);
     }
-
-
 }

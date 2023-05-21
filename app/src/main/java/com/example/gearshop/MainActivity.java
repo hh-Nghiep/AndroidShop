@@ -2,7 +2,9 @@ package com.example.gearshop;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -17,15 +19,21 @@ import com.example.gearshop.ui.banphim.BanPhimFragment;
 import com.example.gearshop.ui.chuot.ChuotFragment;
 import com.example.gearshop.ui.giohang.CartListActivity;
 import com.example.gearshop.ui.home.HomeFragment;
+import com.example.gearshop.ui.Quanli.ItemListActivity;
+import com.example.gearshop.ui.login_register.ui.login.InfoUser;
+import com.example.gearshop.ui.login_register.ui.login.LoginActivity;
+import com.example.gearshop.ui.login_register.ui.login.RegisterActivity;
+import com.example.gearshop.ui.model.SanPham;
 import com.example.gearshop.ui.nguoidung.HoTroFragment;
 import com.example.gearshop.ui.nguoidung.InfoFragment;
 import com.example.gearshop.ui.nguoidung.PasswordFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
-
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int FRAGMENT_HOME = 0;
@@ -45,8 +53,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawerLayout;
     NavigationView navigationView;
-
-
+    Connection connection;
+    TextView tvTenNguoiDung, tvIdNguoiDung, tvSDTNguoiDung;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         replaceFragment(new HomeFragment());
         navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
+
     }
 
     @Override

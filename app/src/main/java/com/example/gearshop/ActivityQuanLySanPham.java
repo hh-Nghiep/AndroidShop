@@ -7,32 +7,28 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.gearshop.ui.Quanli.*;
+import com.example.gearshop.ui.Chart.*;
+
+
 public class ActivityQuanLySanPham extends AppCompatActivity {
-    Button btnChonSP, btnThemSP;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quan_ly_san_pham);
-        btnChonSP = findViewById(R.id.btnChonSP);
-        btnThemSP = findViewById(R.id.btnThemSP);
 
-        btnChonSP.setOnClickListener(new View.OnClickListener() {
+
+        findViewById(R.id.btnQuanliSP).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // khai báo intent Bài 1
-                Intent intentChonSP = new Intent(ActivityQuanLySanPham.this, UpdateActivity.class);
-                // Khởi động == chuyển màn hình
-                startActivity(intentChonSP);
+                startActivity(new Intent(getApplicationContext(), ItemListActivity.class));
             }
         });
 
-        btnThemSP.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnThongke).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // khai báo intent Bài 1
-                Intent intentThemSP = new Intent(ActivityQuanLySanPham.this, Them_SP.class);
-                // Khởi động == chuyển màn hình
-                startActivity(intentThemSP);
+                startActivity(new Intent(getApplicationContext(),ChartMonthActivity.class));
             }
         });
     }

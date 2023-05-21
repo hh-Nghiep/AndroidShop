@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -26,7 +27,8 @@ import java.util.ArrayList;
 
 public class BanPhimFragment extends Fragment {
     String[] items = {"Akko", "Ducky", "iKBC", "Logitech"};
-    AutoCompleteTextView autoComplateChuot;
+    AutoCompleteTextView autoComplate;
+    ArrayAdapter<String> adapterItems;
     View view;
 
     SanPham SP = null;
@@ -42,11 +44,10 @@ public class BanPhimFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_chuot, container, false);
+        view = inflater.inflate(R.layout.fragment_danh_sach_san_pham, container, false);
         setControl();
         setEvent();
-        autoComplateChuot = view.findViewById(R.id.autoComplete_chuot);
-        autoComplateChuot.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        autoComplate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = adapterView.getItemAtPosition(i).toString();
@@ -63,8 +64,8 @@ public class BanPhimFragment extends Fragment {
         rcvSP.setLayoutManager(staggeredGridLayoutManager);
         spAdapter.setListSP(this.getContext(), dataSP);
         rcvSP.setAdapter(spAdapter);
-        //adapter_SP = new CustomAdapter_SP(view.getContext(), R.layout.san_pham, dataSP);
-        //lvDanhSachSP.setAdapter(adapter_SP);
+        adapterItems = new ArrayAdapter<String>(this.getContext(), R.layout.list_item, items);
+        autoComplate.setAdapter(adapterItems);
     }
 
     private void KhoiTao(){
@@ -92,6 +93,7 @@ public class BanPhimFragment extends Fragment {
     private void setControl() {
         lvDanhSachSP = view.findViewById(R.id.lvChuot);
         rcvSP = view.findViewById(R.id.rcvSP);
+        autoComplate = view.findViewById(R.id.autoComplete);
     }
 
     @Override
