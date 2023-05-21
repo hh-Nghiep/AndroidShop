@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 currentFragment = FRAGMENT_HOTRO;
             }
         }else if (id == R.id.nav_quanlysanpham) {
-            Intent intent = new Intent(this, ItemListActivity.class);
+            Intent intent = new Intent(this, ActivityQuanLySanPham.class);
             this.startActivity(intent);
         }
 

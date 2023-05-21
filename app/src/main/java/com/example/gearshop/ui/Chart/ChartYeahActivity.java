@@ -24,11 +24,11 @@ public class ChartYeahActivity extends AppCompatActivity {
         BarChart barChart = findViewById(R.id.yearBarChart);
 
         ArrayList<BarEntry> doanhthunam= new ArrayList<>();
-        doanhthunam.add(new BarEntry(2019,1423));
-        doanhthunam.add(new BarEntry(2020,1230));
-        doanhthunam.add(new BarEntry(2021,1510));
-        doanhthunam.add(new BarEntry(2022,2020));
-        doanhthunam.add(new BarEntry(2023,1923));
+        doanhthunam.add(new BarEntry(2019,173));
+        doanhthunam.add(new BarEntry(2020,230));
+        doanhthunam.add(new BarEntry(2021,150));
+        doanhthunam.add(new BarEntry(2022,220));
+        doanhthunam.add(new BarEntry(2023,240));
 
         BarDataSet barDataSet = new BarDataSet(doanhthunam, "Doanh thu theo các năm");
         barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);

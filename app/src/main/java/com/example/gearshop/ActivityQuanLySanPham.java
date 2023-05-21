@@ -18,17 +18,17 @@ public class ActivityQuanLySanPham extends AppCompatActivity {
         setContentView(R.layout.activity_quan_ly_san_pham);
 
 
-//        findViewById(R.id.btnQuanliSP).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getApplicationContext(), ItemListActivity.class));
-//            }
-//        });
+        findViewById(R.id.btnQuanliSP).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), ItemListActivity.class));
+            }
+        });
 
         findViewById(R.id.btnThongke).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),ChartActivity.class));
+                startActivity(new Intent(getApplicationContext(),ChartMonthActivity.class));
             }
         });
     }
