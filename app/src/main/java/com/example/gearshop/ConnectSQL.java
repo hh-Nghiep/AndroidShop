@@ -8,11 +8,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectSQL {
-    String ip = "192.168.1.9";
+    String ip = "192.168.1.15";
     String classs = "net.sourceforge.jtds.jdbc.Driver";
     String db = "gearshop";
     String un = "sa";
-    String password = "0929149011";
+    String password = "123";
 
     String port = "1433";
 
