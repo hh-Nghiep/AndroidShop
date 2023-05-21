@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +25,8 @@ public class ChiTietSanPham extends AppCompatActivity {
     ViewPager vpChiTietSanPham;
     Image_Adapter mViewPagerAdapter;
     String[] imageUrls;
-    Button btnThemVaoGioHang;
-    ImageButton btnCong, btnTru;
+    Button btnThemVaoGioHang, btnCong, btnTru;
+
     Toolbar toolbar;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -100,16 +99,12 @@ public class ChiTietSanPham extends AppCompatActivity {
         tvTenChiTietSP.setText(sp.getTenSP());
         tvChiTietSP.setText(sp.getMieuTaSP());
 
-        imageUrls = new String[3];
-        if(sp.getHinhAnh1().length() > 32){
-            imageUrls[0] = "https://drive.google.com/uc?id=" + sp.getHinhAnh1().substring(32,sp.getHinhAnh1().lastIndexOf('/'));
-        }
-        if(sp.getHinhAnh2().length() > 32){
-            imageUrls[1] = "https://drive.google.com/uc?id=" + sp.getHinhAnh2().substring(32,sp.getHinhAnh2().lastIndexOf('/'));
-        }
-        if(sp.getHinhAnh3().length() > 32){
-            imageUrls[2] = "https://drive.google.com/uc?id=" + sp.getHinhAnh3().substring(32,sp.getHinhAnh1().lastIndexOf('/'));
-        }
+
+        imageUrls = new String[]{
+                "https://drive.google.com/uc?id=" + sp.getHinhAnh1().substring(32,sp.getHinhAnh1().lastIndexOf('/')),
+                "https://drive.google.com/uc?id=" + sp.getHinhAnh2().substring(32,sp.getHinhAnh2().lastIndexOf('/')),
+                "https://drive.google.com/uc?id=" + sp.getHinhAnh3().substring(32,sp.getHinhAnh3().lastIndexOf('/'))
+        };
         // Initializing the ViewPagerAdapter
         mViewPagerAdapter = new Image_Adapter(ChiTietSanPham.this, imageUrls);
 
@@ -127,4 +122,6 @@ public class ChiTietSanPham extends AppCompatActivity {
         btnCong = findViewById(R.id.btnCongSoLuongCTSP);
         btnTru = findViewById(R.id.btnTruSoLuongCTSP);
     }
+
+
 }
