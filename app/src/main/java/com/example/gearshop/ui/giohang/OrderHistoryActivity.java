@@ -49,12 +49,12 @@ public class OrderHistoryActivity extends AppCompatActivity {
         String img1 = "https://drive.google.com/file/d/1zM6-e3FuDZGeQbCCjcarb1wJ65_Dki8A/view?usp=sharing";
         String img2 = "https://drive.google.com/file/d/1njPEQmMEGokZ0gJUN3VYFtNEgr5RviLD/view?usp=share_link";
 
-        cartList.add(new CartItem(img1, "sản phẩm 1", 1221323, 21332123, 2));
-        cartList.add(new CartItem(img2, "sản phẩm 2", 1223, 21323, 12));
+        cartList.add(new CartItem(img1, "sản phẩm 1", 1221323, 21332123, 2, 1));
+        cartList.add(new CartItem(img2, "sản phẩm 2", 1223, 21323, 12, 2));
 
         ArrayList<CartItem> cartList1 = new ArrayList<>();
-        cartList1.add(new CartItem(img2, "sản phẩm 1 new", 1221323, 21332123, 2));
-        cartList1.add(new CartItem(img1, "sản phẩm 2 new",1223, 21323, 12));
+        cartList1.add(new CartItem(img2, "sản phẩm 1 new", 1221323, 21332123, 2, 3));
+        cartList1.add(new CartItem(img1, "sản phẩm 2 new",1223, 21323, 12, 4));
 
 
         orderHistoryItemsList.add(new OrderHistoryItem("Phong", "123 abc", "Phong@gmail.com", "1231233123", cartList));

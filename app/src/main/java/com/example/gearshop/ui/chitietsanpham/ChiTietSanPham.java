@@ -79,6 +79,7 @@ public class ChiTietSanPham extends AppCompatActivity {
                 cartItem.setAmout(Integer.parseInt(tvSoLuongCTSP.getText().toString()));
                 cartItem.setInitPrice(sp.getGiaSP());
                 cartItem.setTotalPrice(cartItem.getInitPrice()*cartItem.getAmout());
+                cartItem.setId(sp.getMaSP());
 //
 //                ArrayList<CartItem> ListItem = ListItemCart.getCartItemsList();
 //                ListItem.add(cartItem);
@@ -87,14 +88,25 @@ public class ChiTietSanPham extends AppCompatActivity {
 //                Nếu sp chưa có thì thêm mới vào list nếu sp đã có thì tăng số lượng
 //                ds giỏ hàng dùng một số field khác như số lượng tổng giá nên dùng cái class CartItem mà lưu
 //                CartOfUser.globalCart.add(cartItem);
-                if(CartOfUser.CartUser.indexOf(sp) == -1){
-                    CartOfUser.CartUser.add(sp);
+                if(CartOfUser.globalCart.size() > 0){
+                    Boolean check = false;
+                    for( Integer i = 0 ; i < CartOfUser.globalCart.size() ; i++){
+                        if(CartOfUser.globalCart.get(i).getId() == sp.getMaSP()){
+                            check = true;
+                            Integer SLBanDau = CartOfUser.globalCart.get(i).getAmout();
+                            cartItem.setAmout(SLBanDau + Integer.parseInt(tvSoLuongCTSP.getText().toString()));
+                            CartOfUser.globalCart.set(i, cartItem);
+                            break;
+                        }
+                    }
+                    if(check == false){
+                        CartOfUser.globalCart.add(cartItem);
+                    }
                 }else{
-                    Integer SLBanDau = CartOfUser.CartUser.get(CartOfUser.CartUser.indexOf(sp)).getSoLuong();
-                    CartOfUser.CartUser.set(CartOfUser.CartUser.indexOf(sp), new SanPham(sp.getMaSP(), sp.getTenSP(), sp.getGiaSP(), sp.getMaTL(), sp.getMaTH(), sp.getMieuTaSP(), sp.getHinhAnh1(), sp.getHinhAnh2(), sp.getHinhAnh3(), sp.getSoLuong()+SLBanDau));
+                    CartOfUser.globalCart.add(cartItem);
                 }
 
-                CartOfUser.globalCart.add(cartItem);
+//                CartOfUser.globalCart.add(cartItem);
                 Intent intent = new Intent(ChiTietSanPham.this, CartListActivity.class);
                 ChiTietSanPham.this.startActivity(intent);
             }

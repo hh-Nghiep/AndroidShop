@@ -65,8 +65,8 @@ public class OrderListActivity extends AppCompatActivity {
         String img1 = "https://drive.google.com/file/d/1zM6-e3FuDZGeQbCCjcarb1wJ65_Dki8A/view?usp=sharing";
         String img2 = "https://drive.google.com/file/d/1njPEQmMEGokZ0gJUN3VYFtNEgr5RviLD/view?usp=share_link";
 
-        cartItemsList.add(new CartItem(img1, "sản phẩm 1", 123, 2123, 1));
-        cartItemsList.add(new CartItem(img2, "sản phẩm 2", 1223, 21323, 12));
+        cartItemsList.add(new CartItem(img1, "sản phẩm 1", 123, 2123, 1, 1));
+        cartItemsList.add(new CartItem(img2, "sản phẩm 2", 1223, 21323, 12, 2));
 
         return cartItemsList;
     }

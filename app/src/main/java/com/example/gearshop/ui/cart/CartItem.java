@@ -1,6 +1,17 @@
 package com.example.gearshop.ui.cart;
 
 public class CartItem {
+
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     private String img;
     private String name;
     private int initPrice;
@@ -50,11 +61,12 @@ public class CartItem {
     public CartItem() {
     }
 
-    public CartItem(String img, String name, int initPrice, int totalPrice, int amout) {
+    public CartItem(String img, String name, int initPrice, int totalPrice, int amout, int id) {
         this.img = img;
         this.name = name;
         this.initPrice = initPrice;
         this.totalPrice = totalPrice;
         this.amout = amout;
+        this.id = id;
     }
 }
