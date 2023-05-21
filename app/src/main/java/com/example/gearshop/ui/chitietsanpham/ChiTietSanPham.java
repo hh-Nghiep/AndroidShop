@@ -87,8 +87,13 @@ public class ChiTietSanPham extends AppCompatActivity {
 //                Nếu sp chưa có thì thêm mới vào list nếu sp đã có thì tăng số lượng
 //                ds giỏ hàng dùng một số field khác như số lượng tổng giá nên dùng cái class CartItem mà lưu
 //                CartOfUser.globalCart.add(cartItem);
+                if(CartOfUser.CartUser.indexOf(sp) == -1){
+                    CartOfUser.CartUser.add(sp);
+                }else{
+                    Integer SLBanDau = CartOfUser.CartUser.get(CartOfUser.CartUser.indexOf(sp)).getSoLuong();
+                    CartOfUser.CartUser.set(CartOfUser.CartUser.indexOf(sp), new SanPham(sp.getMaSP(), sp.getTenSP(), sp.getGiaSP(), sp.getMaTL(), sp.getMaTH(), sp.getMieuTaSP(), sp.getHinhAnh1(), sp.getHinhAnh2(), sp.getHinhAnh3(), sp.getSoLuong()+SLBanDau));
+                }
 
-                CartOfUser.CartUser.add(sp);
                 CartOfUser.globalCart.add(cartItem);
                 Intent intent = new Intent(ChiTietSanPham.this, CartListActivity.class);
                 ChiTietSanPham.this.startActivity(intent);
