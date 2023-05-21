@@ -20,6 +20,7 @@ import com.example.gearshop.R;
 import com.example.gearshop.ui.cart.CartArrayAdapter;
 import com.example.gearshop.ui.cart.CartItem;
 import com.example.gearshop.ui.cart.CartOfUser;
+import com.example.gearshop.ui.cart.ListItemCart;
 import com.example.gearshop.ui.model.SanPham;
 import com.example.gearshop.ui.orderHistory.CustomCartArrayAdapter;
 
@@ -30,6 +31,8 @@ public class CartListActivity extends AppCompatActivity {
     Button btnThanhToanHoaDon;
     public static TextView tongTientxt, numberItemTxt;
     public static  ArrayList<CartItem> cartItemsList;
+
+    ListItemCart listItemCart = new ListItemCart();
     CustomCartArrayAdapter CustomCartArrayAdapter;
     ListView lv;
     ImageButton minusCartBtn, plusCartBtn;
@@ -81,26 +84,35 @@ public class CartListActivity extends AppCompatActivity {
     }
     private ArrayList<CartItem> createMockup () {
         cartItemsList = new ArrayList<>();
+        String img1 = "https://drive.google.com/file/d/1zM6-e3FuDZGeQbCCjcarb1wJ65_Dki8A/view?usp=sharing";
+        String img2 = "https://drive.google.com/file/d/1njPEQmMEGokZ0gJUN3VYFtNEgr5RviLD/view?usp=share_link";
 
-        cartItemsList.add(new CartItem(R.drawable.baseline_logout_24, "sản phẩm 1", 123, 2123, 1));
-        cartItemsList.add(new CartItem(R.drawable.baseline_logout_24, "sản phẩm 2", 122223, 21323, 12));
+        cartItemsList.add(new CartItem(img1, "sản phẩm 1", 123, 2123, 1));
+        cartItemsList.add(new CartItem(img2, "sản phẩm 2", 122223, 21323, 12));
+
+        int tong1 = cartItemsList.get(0).getAmout() * cartItemsList.get(0).getInitPrice();
+        cartItemsList.get(0).setTotalPrice(tong1);
+
+        int tong2 = cartItemsList.get(1).getAmout() * cartItemsList.get(1).getInitPrice();
+        cartItemsList.get(1).setTotalPrice(tong2);
 
         return cartItemsList;
     }
+
     private void setControl() {
         btnThanhToanHoaDon = findViewById(R.id.btnThanhToanHoaDon);
         minusCartBtn = findViewById(R.id.minusCartBtn);
         plusCartBtn = findViewById(R.id.plusCartBtn);
         numberItemTxt = findViewById(R.id.numberItemTxt);
         tongTientxt = findViewById(R.id.totalPriceTxt);
+        cartItemsList = new ArrayList<>();
 
-        cartItemsList = createMockup();
-
+        cartItemsList = CartOfUser.globalCart;
 
         tinhTongTien(cartItemsList);
         lv = findViewById(R.id.CartLV);
 
-        CustomCartArrayAdapter = new CustomCartArrayAdapter(CartListActivity.this, cartItemsList);
+        CustomCartArrayAdapter = new CustomCartArrayAdapter(CartListActivity.this, cartItemsList, "cart");
 
         lv.setAdapter(CustomCartArrayAdapter);
 

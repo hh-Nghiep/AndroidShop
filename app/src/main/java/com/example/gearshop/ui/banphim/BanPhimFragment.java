@@ -73,21 +73,16 @@ public class BanPhimFragment extends Fragment {
             ConnectSQL con = new ConnectSQL();
             connection = con.CONN();
             if(connection != null){
-                String query = "select * from SanPham where maTL = 2";
+                String query = "select sp.MaSP, sp.TenSP, sp.GiaSP, sp.MaTL, th.TenTH, sp.MieuTaSP, sp.HinhAnh1, sp.HinhAnh2, sp.HinhAnh3, sp.SoLuong from SanPham as sp left join ThuongHieu as th on th.MaTH = sp.MaTH where MaTL = 2";
                 Statement statement = connection.createStatement();
                 ResultSet rs = statement.executeQuery(query);
                 while (rs.next()){
-                    dataSP.add(new SanPham(rs.getInt(1), rs.getString(2), rs.getFloat(3), rs.getInt(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9)));
+                    dataSP.add(new SanPham(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10)));
                 }
             }
         }catch (Exception ex){
             System.err.print(ex.getMessage());
         }
-//        dataSP.add(new SanPham("G102", "Sản Phẩm 1", "https://drive.google.com/file/d/1Ik50QrnkZf79DV-mtAS3t_bsp-nJ7ii9/view", "https://drive.google.com/file/d/17mX8ppREgri1VfoT59qHqPQl1wwSvRDe/view?usp=share_link", "https://drive.google.com/file/d/1Ba0yNq3Hz_GYtyGWAquJg8uryLgOHukW/view?usp=share_link", 1, 1, 1, 100F));
-//        dataSP.add(new SanPham("G403", "Sản Phẩm 2", "https://drive.google.com/file/d/17mX8ppREgri1VfoT59qHqPQl1wwSvRDe/view?usp=share_link", "hinhAnh2", "hinhAnh3", 2, 2, 2, 200F));
-//        dataSP.add(new SanPham("G502", "Sản Phẩm 3", "https://drive.google.com/file/d/1Ba0yNq3Hz_GYtyGWAquJg8uryLgOHukW/view?usp=share_link", "hinhAnh2", "hinhAnh3", 3, 3, 3, 300F));
-//        dataSP.add(new SanPham("G903", "Sản Phẩm 4", "https://drive.google.com/file/d/13Jv1_vTtGH6p2XHcTyiBs_-_8pLK_IvH/view?usp=share_link", "hinhAnh2", "hinhAnh3", 4, 4, 4, 400F));
-//        dataSP.add(new SanPham("G-Pro", "Sản Phẩm 5", "https://drive.google.com/file/d/112Vj3BQvoobCJxt4tzDcvNs6juBhnUhT/view?usp=share_link", "hinhAnh2", "hinhAnh3", 5, 5, 5, 500F));
     }
 
     private void setControl() {
