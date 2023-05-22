@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.chuot.ChuotFragment"
     android:orientation="vertical">
-    <include layout="@layout/tool_bar"/>
 
     <LinearLayout
         android:id="@+id/LLO"

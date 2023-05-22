@@ -172,7 +172,7 @@ public class OrderListActivity extends AppCompatActivity {
                         connection.close();
 
                         Toast.makeText( getApplicationContext(), "Đặt hàng thành công!",Toast.LENGTH_LONG).show();
-
+                        CartOfUser.globalCart.clear();
                     } catch (SQLException ex) {
                         Log.d("err", ex.getMessage());
                     }

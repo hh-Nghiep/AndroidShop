@@ -34,8 +34,6 @@ public class BanPhimFragment extends Fragment {
 
     ArrayList<SanPham> dataSP = new ArrayList<>();
 
-
-
     ListView lvDanhSachSP;
     RecyclerView rcvSP;
     SPAdapter spAdapter;
@@ -48,8 +46,6 @@ public class BanPhimFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_danh_sach_san_pham, container, false);
-        toolbar = view.findViewById(R.id.toolbar);
-        toolbar.setVisibility(View.INVISIBLE);
         setControl();
         KhoiTao();
         setEvent(dataSP);

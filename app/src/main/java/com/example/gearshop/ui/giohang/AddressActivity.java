@@ -47,4 +47,8 @@ public class AddressActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+    }
 }

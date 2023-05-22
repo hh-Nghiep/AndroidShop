@@ -3,6 +3,7 @@ package com.example.gearshop.ui.chitietsanpham;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
@@ -93,7 +94,7 @@ public class ChiTietSanPham extends AppCompatActivity {
                     if(CartOfUser.globalCart.size() > 0){
                         Boolean check = false;
                         for( Integer i = 0 ; i < CartOfUser.globalCart.size() ; i++){
-                            if(CartOfUser.globalCart.get(i).getId() == sp.getMaSP()){
+                            if(CartOfUser.globalCart.get(i).getId().equals(sp.getMaSP())){
                                 check = true;
                                 Integer SLBanDau = CartOfUser.globalCart.get(i).getAmout();
                                 cartItem.setAmout(SLBanDau + Integer.parseInt(tvSoLuongCTSP.getText().toString()));
@@ -182,5 +183,10 @@ public class ChiTietSanPham extends AppCompatActivity {
         btnCong = findViewById(R.id.btnCongSoLuongCTSP);
         btnTru = findViewById(R.id.btnTruSoLuongCTSP);
         tvsoLuongSanCo = findViewById(R.id.soLuongSanCo);
+    }
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
     }
 }
