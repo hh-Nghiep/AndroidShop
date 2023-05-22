@@ -84,6 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
                             while (rs.next()){
                                 checkEmail = false;
                             }
+                            connection.close();
                         }
                     }catch (Exception ex){
                         System.err.print(ex.getMessage());
@@ -99,6 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
                             while (rs.next()){
                                 checkSDT = false;
                             }
+                            connection.close();
                         }
                     }catch (Exception ex){
                         System.err.print(ex.getMessage());
@@ -114,6 +116,7 @@ public class RegisterActivity extends AppCompatActivity {
                             while (rs.next()){
                                 checkCMND = false;
                             }
+                            connection.close();
                         }
                     }catch (Exception ex){
                         System.err.print(ex.getMessage());

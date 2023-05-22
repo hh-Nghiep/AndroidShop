@@ -68,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             LoginActivity.this.startActivity(intent);
                         }
+                        connection.close();
                     }
                     if(!flag){
                         Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không hợp lệ !!!",Toast.LENGTH_LONG).show();

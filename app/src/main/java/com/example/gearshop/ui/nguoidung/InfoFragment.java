@@ -87,6 +87,7 @@ public class InfoFragment extends Fragment {
                             while (rs.next()){
                                 checkEmail = false;
                             }
+                            connection.close();
                         }
                     }catch (Exception ex){
                         System.err.print(ex.getMessage());
@@ -102,6 +103,7 @@ public class InfoFragment extends Fragment {
                             while (rs.next()){
                                 checkSDT = false;
                             }
+                            connection.close();
                         }
                     }catch (Exception ex){
                         System.err.print(ex.getMessage());
@@ -117,6 +119,7 @@ public class InfoFragment extends Fragment {
                             while (rs.next()){
                                 checkCMND = false;
                             }
+                            connection.close();
                         }
                     }catch (Exception ex){
                         System.err.print(ex.getMessage());
@@ -140,6 +143,7 @@ public class InfoFragment extends Fragment {
                             InfoUser.SDT_user = SDT;
                             InfoUser.CMND_user = CMND;
                             InfoUser.DiaChi_user = diaChi;
+                            connection.close();
                             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
                             transaction.replace(R.id.content_frame, new HomeFragment());
                             transaction.commit();

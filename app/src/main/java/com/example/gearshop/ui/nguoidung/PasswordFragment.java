@@ -64,6 +64,7 @@ public class PasswordFragment extends Fragment {
                             while (rs.next()){
                                 checkMK = true;
                             }
+                            connection.close();
                         }
                     }catch (Exception ex){
                         System.err.print(ex.getMessage());
@@ -79,7 +80,7 @@ public class PasswordFragment extends Fragment {
                             stmt.setInt(2, InfoUser.id_user);
                             stmt.executeUpdate();
                             Toast.makeText(PasswordFragment.this.getContext(), "Thay đổi thành công", Toast.LENGTH_SHORT).show();
-
+                            connection.close();
                             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
                             transaction.replace(R.id.content_frame, new HomeFragment());
                             transaction.commit();
