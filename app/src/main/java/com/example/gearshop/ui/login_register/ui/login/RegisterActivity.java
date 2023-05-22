@@ -27,8 +27,8 @@ import java.sql.Statement;
 import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
-    String EMAIL_REGEX =   "^[A-Za-z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$";
-    String PHONE_REGEX =   "^[0-9._-]{12}$";
+    String EMAIL_REGEX =   "\\b[A-Z0-9._%-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b";
+    String PHONE_REGEX =   "^[0-9._-]{10}$";
     String CMND_REGEX =   "^[0-9._-]{9}$";
     String CCCD_REGEX =   "^[0-9._-]{12}$";
     Toolbar toolbar;
@@ -64,14 +64,14 @@ public class RegisterActivity extends AppCompatActivity {
                 Pattern ptPhone = Pattern.compile(PHONE_REGEX);
                 Pattern ptCMND = Pattern.compile(CMND_REGEX);
                 Pattern ptCCCD = Pattern.compile(CCCD_REGEX);
-                Boolean checkEmail = true, checkSDT = true;
+                Boolean checkEmail = true, checkSDT = true, checkCMND = true;
                 if(email.equals("") || matKhau.equals("") ||  tenNguoiDung.equals("") ||  SDT.equals("") ||  CMND.equals("") ||  diaChi.equals("")){
                     tvThongBao.setText("Vui Lòng Điền Đầy Đủ Thông Tin !!!");
-                }else if(ptEmail.matcher(email).matches()){
+                }else if(!ptEmail.matcher(email).matches()){
                     tvThongBao.setText("Email không hợp lệ. Vui lòng kiểm tra lại Email !!!");
-                } else if (ptCMND.matcher(CMND).matches() && ptCCCD.matcher(CMND).matches()) {
+                } else if (!ptCMND.matcher(CMND).matches() && !ptCCCD.matcher(CMND).matches()) {
                     tvThongBao.setText("CMND/CCCD không hợp lệ. Vui lòng kiểm tra lại CMND/CCCD !!!");
-                } else if (ptPhone.matcher(SDT).matches()) {
+                } else if (!ptPhone.matcher(SDT).matches()) {
                     tvThongBao.setText("Số điện thoại không hợp lệ. Vui lòng kiểm tra lại số điện thoại !!!");
                 }else{
                     try {
@@ -104,8 +104,23 @@ public class RegisterActivity extends AppCompatActivity {
                         System.err.print(ex.getMessage());
                     }
 
+                    try {
+                        ConnectSQL con = new ConnectSQL();
+                        connection = con.CONN();
+                        if(connection != null){
+                            String query = "select * from TaiKhoan where CMND = '" + CMND + "'";
+                            Statement statement = connection.createStatement();
+                            ResultSet rs = statement.executeQuery(query);
+                            while (rs.next()){
+                                checkCMND = false;
+                            }
+                        }
+                    }catch (Exception ex){
+                        System.err.print(ex.getMessage());
+                    }
 
-                    if(checkEmail && checkSDT){
+
+                    if(checkEmail && checkSDT && checkCMND){
                         try {
                             ConnectSQL con = new ConnectSQL();
                             connection = con.CONN();
@@ -113,12 +128,12 @@ public class RegisterActivity extends AppCompatActivity {
                                 String sql ="INSERT INTO TaiKhoan values (?,?,?,?,?,?,?) ";
                                 try {
                                     PreparedStatement ps = connection.prepareStatement(sql);
-                                    ps.setString(1, email);
-                                    ps.setString(2, matKhau);
-                                    ps.setString(3, tenNguoiDung);
-                                    ps.setString(4, SDT);
-                                    ps.setString(5, CMND);
-                                    ps.setString(6, diaChi);
+                                    ps.setString(1, email.trim());
+                                    ps.setString(2, matKhau.trim());
+                                    ps.setString(3, tenNguoiDung.trim());
+                                    ps.setString(4, SDT.trim());
+                                    ps.setString(5, CMND.trim());
+                                    ps.setString(6, diaChi.trim());
                                     ps.setString(7, "1");
                                     ps.executeUpdate();
                                     ps.close();
@@ -138,7 +153,9 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                         if(!checkSDT){
                             Toast.makeText(RegisterActivity.this, "SDT đã tồn tại. Vui lòng chọn SDT khác !!!",Toast.LENGTH_LONG).show();
-
+                        }
+                        if(!checkCMND){
+                            Toast.makeText(RegisterActivity.this, "CMND đã tồn tại. Vui lòng chọn CMND khác !!!",Toast.LENGTH_LONG).show();
                         }
                     }
 

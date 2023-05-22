@@ -5,15 +5,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.gearshop.R;
+import com.example.gearshop.ui.MuaSamNgay.MuaSamNgayActivity;
 import com.example.gearshop.ui.login_register.ui.login.InfoUser;
 import com.example.gearshop.ui.login_register.ui.login.LoginActivity;
 import com.example.gearshop.ui.login_register.ui.login.RegisterActivity;
@@ -28,6 +31,8 @@ public class HomeFragment extends Fragment {
     Image_Adapter mViewPagerAdapter;
 
     String[] imageUrls;
+
+    Button btnMuaSamNgay;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -61,6 +66,14 @@ public class HomeFragment extends Fragment {
                 HomeFragment.this.startActivity(intent);
             }
         });
+
+        btnMuaSamNgay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeFragment.this.getActivity(), MuaSamNgayActivity.class);
+                HomeFragment.this.startActivity(intent);
+            }
+        });
     }
 
     private void KhoiTao(){
@@ -78,6 +91,7 @@ public class HomeFragment extends Fragment {
         vpHome = view.findViewById(R.id.vphome);
         tvDangNhap = view.findViewById(R.id.tvDangNhap);
         tvDangKy = view.findViewById(R.id.tvDangKy);
+        btnMuaSamNgay = view.findViewById(R.id.imagebtnMuaSamNgay);
     }
     @Override
     public void onDestroyView() {

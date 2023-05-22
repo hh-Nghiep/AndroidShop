@@ -21,6 +21,7 @@ import com.example.gearshop.ui.cart.CartOfUser;
 import com.example.gearshop.ui.cart.ListItemCart;
 import com.example.gearshop.ui.giohang.CartListActivity;
 import com.example.gearshop.R;
+import com.example.gearshop.ui.login_register.ui.login.InfoUser;
 import com.example.gearshop.ui.model.Image_Adapter;
 import com.example.gearshop.ui.model.SanPham;
 
@@ -72,14 +73,15 @@ public class ChiTietSanPham extends AppCompatActivity {
         btnThemVaoGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CartItem cartItem = new CartItem();
+                if(InfoUser.id_user != 0){
+                    CartItem cartItem = new CartItem();
 //
-                cartItem.setImg(sp.getHinhAnh1());
-                cartItem.setName(sp.getTenSP());
-                cartItem.setAmout(Integer.parseInt(tvSoLuongCTSP.getText().toString()));
-                cartItem.setInitPrice(sp.getGiaSP());
-                cartItem.setTotalPrice(cartItem.getInitPrice()*cartItem.getAmout());
-                cartItem.setId(sp.getMaSP());
+                    cartItem.setImg(sp.getHinhAnh1());
+                    cartItem.setName(sp.getTenSP());
+                    cartItem.setAmout(Integer.parseInt(tvSoLuongCTSP.getText().toString()));
+                    cartItem.setInitPrice(sp.getGiaSP());
+                    cartItem.setTotalPrice(cartItem.getInitPrice()*cartItem.getAmout());
+                    cartItem.setId(sp.getMaSP());
 //
 //                ArrayList<CartItem> ListItem = ListItemCart.getCartItemsList();
 //                ListItem.add(cartItem);
@@ -88,27 +90,30 @@ public class ChiTietSanPham extends AppCompatActivity {
 //                Nếu sp chưa có thì thêm mới vào list nếu sp đã có thì tăng số lượng
 //                ds giỏ hàng dùng một số field khác như số lượng tổng giá nên dùng cái class CartItem mà lưu
 //                CartOfUser.globalCart.add(cartItem);
-                if(CartOfUser.globalCart.size() > 0){
-                    Boolean check = false;
-                    for( Integer i = 0 ; i < CartOfUser.globalCart.size() ; i++){
-                        if(CartOfUser.globalCart.get(i).getId() == sp.getMaSP()){
-                            check = true;
-                            Integer SLBanDau = CartOfUser.globalCart.get(i).getAmout();
-                            cartItem.setAmout(SLBanDau + Integer.parseInt(tvSoLuongCTSP.getText().toString()));
-                            CartOfUser.globalCart.set(i, cartItem);
-                            break;
+                    if(CartOfUser.globalCart.size() > 0){
+                        Boolean check = false;
+                        for( Integer i = 0 ; i < CartOfUser.globalCart.size() ; i++){
+                            if(CartOfUser.globalCart.get(i).getId() == sp.getMaSP()){
+                                check = true;
+                                Integer SLBanDau = CartOfUser.globalCart.get(i).getAmout();
+                                cartItem.setAmout(SLBanDau + Integer.parseInt(tvSoLuongCTSP.getText().toString()));
+                                CartOfUser.globalCart.set(i, cartItem);
+                                break;
+                            }
                         }
-                    }
-                    if(check == false){
+                        if(check == false){
+                            CartOfUser.globalCart.add(cartItem);
+                        }
+                    }else{
                         CartOfUser.globalCart.add(cartItem);
                     }
-                }else{
-                    CartOfUser.globalCart.add(cartItem);
-                }
 
 //                CartOfUser.globalCart.add(cartItem);
-                Intent intent = new Intent(ChiTietSanPham.this, CartListActivity.class);
-                ChiTietSanPham.this.startActivity(intent);
+                    Intent intent = new Intent(ChiTietSanPham.this, CartListActivity.class);
+                    ChiTietSanPham.this.startActivity(intent);
+                }else{
+                    Toast.makeText(ChiTietSanPham.this, "Vui Lòng đăng nhập trước khi thêm sản phẩm vào giỏ hàng !!!",Toast.LENGTH_LONG).show();
+                }
             }
         });
 

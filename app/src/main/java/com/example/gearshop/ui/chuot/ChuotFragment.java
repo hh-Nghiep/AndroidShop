@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -26,7 +27,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ChuotFragment extends Fragment {
-    String[] items = {"Corsair", "Dare-u", "Fuhlen", "Logitech",  "Razer"};
+    String[] items = {"Tất cả", "Corsair", "Dare-u", "Fuhlen", "Logitech",  "Razer"};
     AutoCompleteTextView autoComplate;
     ArrayAdapter<String> adapterItems;
     View view;
@@ -38,26 +39,47 @@ public class ChuotFragment extends Fragment {
     SPAdapter spAdapter;
 
     Connection connection;
+    Toolbar toolbar;
 
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_danh_sach_san_pham, container, false);
+        toolbar = view.findViewById(R.id.toolbar);
+        toolbar.setVisibility(View.INVISIBLE);
         setControl();
-        setEvent();
+        KhoiTao();
+        setEvent(dataSP);
         autoComplate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(getActivity().getApplicationContext(), item,Toast.LENGTH_LONG).show();
+                ArrayList<SanPham> dataSP2 = new ArrayList<>();
+                try {
+                    ConnectSQL con = new ConnectSQL();
+                    connection = con.CONN();
+                    if(connection != null){
+                        String query = "select sp.MaSP, sp.TenSP, sp.GiaSP, sp.MaTL, th.TenTH, sp.MieuTaSP, sp.HinhAnh1, sp.HinhAnh2, sp.HinhAnh3, sp.SoLuong from SanPham as sp left join ThuongHieu as th on th.MaTH = sp.MaTH where MaTL = 1 and th.TenTH = '" + item + "'";
+                        if(item.equals("Tất cả")){
+                            query = "select sp.MaSP, sp.TenSP, sp.GiaSP, sp.MaTL, th.TenTH, sp.MieuTaSP, sp.HinhAnh1, sp.HinhAnh2, sp.HinhAnh3, sp.SoLuong from SanPham as sp left join ThuongHieu as th on th.MaTH = sp.MaTH where MaTL = 1";
+                        }
+                        Statement statement = connection.createStatement();
+                        ResultSet rs = statement.executeQuery(query);
+                        while (rs.next()){
+                            dataSP2.add(new SanPham(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10)));
+                        }
+                        setEvent(dataSP2);
+                    }
+                }catch (Exception ex){
+                    System.err.print(ex.getMessage());
+                }
             }
         });
         return view;
     }
 
-    private void setEvent() {
-        KhoiTao();
+    private void setEvent(ArrayList<SanPham> dataSP) {
         spAdapter = new SPAdapter();
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rcvSP.setLayoutManager(staggeredGridLayoutManager);
