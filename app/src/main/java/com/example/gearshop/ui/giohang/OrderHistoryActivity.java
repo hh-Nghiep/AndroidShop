@@ -22,6 +22,7 @@ import com.example.gearshop.R;
 import com.example.gearshop.ui.cart.CartItem;
 import com.example.gearshop.ui.cart.CartOfUser;
 import com.example.gearshop.ui.home.HomeFragment;
+import com.example.gearshop.ui.login_register.ui.login.InfoUser;
 import com.example.gearshop.ui.model.SanPham;
 import com.example.gearshop.ui.orderHistory.OrderHistoryAdapter;
 import com.example.gearshop.ui.orderHistory.OrderHistoryItem;
@@ -96,6 +97,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
         adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, items);
         autoComplate.setAdapter(adapterItems);
 
+
     }
 
     private void setControl() {
@@ -122,9 +124,9 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 String query = "";
 //                String query = "select TenNguoiNhan, DiaChi, SoDienThoai, NgayTaoDH, TrangThaiDH from DonHang where maTK = '" + InfoUser.id_user + "'";
                 if (status == 5) {
-                    query = "select MaDH, TenNguoiNhan, DiaChi, SoDienThoai, NgayTaoDH, TrangThaiDH from DonHang where maTK = '" + 3 + "'";
+                    query = "select MaDH, TenNguoiNhan, DiaChi, SoDienThoai, NgayTaoDH, TrangThaiDH from DonHang where maTK = '" + InfoUser.id_user + "'";
                 } else {
-                    query = "select MaDH, TenNguoiNhan, DiaChi, SoDienThoai, NgayTaoDH, TrangThaiDH from DonHang where maTK = '" + 3 + "' and TrangThaiDH = '" + status + "' ";
+                    query = "select MaDH, TenNguoiNhan, DiaChi, SoDienThoai, NgayTaoDH, TrangThaiDH from DonHang where maTK = '" + InfoUser.id_user + "' and TrangThaiDH = '" + status + "' ";
                 }
                 Statement statement = connection.createStatement();
                 ResultSet rs = statement.executeQuery(query);
@@ -163,9 +165,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
             }
         }
     }
-
-
-
 
 
     @Override

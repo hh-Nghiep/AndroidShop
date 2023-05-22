@@ -48,7 +48,7 @@ public class MuaSamNgayActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setVisibility(View.INVISIBLE);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setControl();
         KhoiTao();
         setEvent(dataSP);

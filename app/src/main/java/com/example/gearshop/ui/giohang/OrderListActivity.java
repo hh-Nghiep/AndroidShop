@@ -118,8 +118,7 @@ public class OrderListActivity extends AppCompatActivity {
                 try {
                     java.sql.Date date = new java.sql.Date(millis);
                     PreparedStatement ps = connection.prepareStatement(sql);
-//                    ps.setInt(1, InfoUser.id_user);
-                    ps.setInt(1, 3);
+                    ps.setInt(1, InfoUser.id_user);
                     ps.setDate(2, date);
                     ps.setInt(3, 0);
                     ps.setString(4, CartOfUser.customerAddress.getName());
@@ -143,7 +142,7 @@ public class OrderListActivity extends AppCompatActivity {
             connection = con.CONN();
             if(connection != null){
 //                String query = "select max(maDH) from DonHang where maTK = '" + InfoUser.id_user + "'";
-                String query = "select max(maDH) from DonHang where maTK = '" + 3 + "'";
+                String query = "select max(maDH) from DonHang where maTK = '" + InfoUser.id_user + "'";
                 Statement statement = connection.createStatement();
                 ResultSet rs = statement.executeQuery(query);
                 while (rs.next()){
@@ -172,7 +171,6 @@ public class OrderListActivity extends AppCompatActivity {
                         connection.close();
 
                         Toast.makeText( getApplicationContext(), "Đặt hàng thành công!",Toast.LENGTH_LONG).show();
-                        CartOfUser.globalCart.clear();
                     } catch (SQLException ex) {
                         Log.d("err", ex.getMessage());
                     }
@@ -181,6 +179,7 @@ public class OrderListActivity extends AppCompatActivity {
                 Log.d("err", ex.getMessage());
             }
         }
+        CartOfUser.globalCart.clear();
 
     }
     public static void tongTienThanhToan (ArrayList<CartItem> cartItemsList) {
