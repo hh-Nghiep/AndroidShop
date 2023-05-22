@@ -59,6 +59,32 @@ public class OrderHistoryActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = adapterView.getItemAtPosition(i).toString();
+                switch (item) {
+                    case "Tất cả": {
+                        layDSDonhang(5);
+                        break;
+                    }
+                    case "Chờ Duyệt": {
+                        layDSDonhang(0);
+                        break;
+                    }
+                    case "Đang vận chuyển": {
+                        layDSDonhang(1);
+                        break;
+                    }
+                    case "Đã giao": {
+                        layDSDonhang(2);
+                        break;
+                    }
+                    case "Đã hủy": {
+                        layDSDonhang(3);
+                        break;
+                    }
+
+                }
+                orderHistoryAdapter = new OrderHistoryAdapter(OrderHistoryActivity.this, R.layout.danh_sach_don_hang_da_dat, orderHistoryItemsList);
+
+                lv.setAdapter(orderHistoryAdapter);
                 Toast.makeText( getApplicationContext(), item,Toast.LENGTH_LONG).show();
             }
         });
@@ -69,27 +95,9 @@ public class OrderHistoryActivity extends AppCompatActivity {
         adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, items);
         autoComplate.setAdapter(adapterItems);
     }
-    private ArrayList<OrderHistoryItem> createMockup () {
-        orderHistoryItemsList = new ArrayList<>();
-        ArrayList<CartItem> cartList = new ArrayList<>();
-        String img1 = "https://drive.google.com/file/d/1zM6-e3FuDZGeQbCCjcarb1wJ65_Dki8A/view?usp=sharing";
-        String img2 = "https://drive.google.com/file/d/1njPEQmMEGokZ0gJUN3VYFtNEgr5RviLD/view?usp=share_link";
 
-        cartList.add(new CartItem(img1, "sản phẩm 1", 1221323, 21332123, 2, 1));
-        cartList.add(new CartItem(img2, "sản phẩm 2", 1223, 21323, 12, 2));
-
-        ArrayList<CartItem> cartList1 = new ArrayList<>();
-        cartList1.add(new CartItem(img2, "sản phẩm 1 new", 1221323, 21332123, 2, 3));
-        cartList1.add(new CartItem(img1, "sản phẩm 2 new",1223, 21323, 12, 4));
-
-
-        orderHistoryItemsList.add(new OrderHistoryItem("Phong", "123 abc", "Phong@gmail.com", "1231233123", cartList));
-        orderHistoryItemsList.add(new OrderHistoryItem("Phong134", "12323 abc", "Phong1@gmail.com", "1231233123", cartList1));
-
-        return orderHistoryItemsList;
-    }
     private void setControl() {
-        layDSDonhang();
+        layDSDonhang(5);
         tongTientxt = findViewById(R.id.orderHistoryTotalPriceTxt);
 //        orderHistoryItemsList = createMockup();
 
@@ -102,14 +110,20 @@ public class OrderHistoryActivity extends AppCompatActivity {
         lv.setAdapter(orderHistoryAdapter);
     }
 
-    private void layDSDonhang () {
+    private void layDSDonhang (int status) {
+
         orderHistoryItemsList = new ArrayList<>();
         try {
             ConnectSQL con = new ConnectSQL();
             connection = con.CONN();
             if(connection != null){
+                String query = "";
 //                String query = "select TenNguoiNhan, DiaChi, SoDienThoai, NgayTaoDH, TrangThaiDH from DonHang where maTK = '" + InfoUser.id_user + "'";
-                String query = "select MaDH, TenNguoiNhan, DiaChi, SoDienThoai, NgayTaoDH, TrangThaiDH from DonHang where maTK = '" + 3 + "'";
+                if (status == 5) {
+                    query = "select MaDH, TenNguoiNhan, DiaChi, SoDienThoai, NgayTaoDH, TrangThaiDH from DonHang where maTK = '" + 3 + "'";
+                } else {
+                    query = "select MaDH, TenNguoiNhan, DiaChi, SoDienThoai, NgayTaoDH, TrangThaiDH from DonHang where maTK = '" + 3 + "' and TrangThaiDH = '" + status + "' ";
+                }
                 Statement statement = connection.createStatement();
                 ResultSet rs = statement.executeQuery(query);
                 while (rs.next()){
