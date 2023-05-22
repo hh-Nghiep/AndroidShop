@@ -27,6 +27,7 @@ import com.example.gearshop.ui.orderHistory.OrderHistoryAdapter;
 import com.example.gearshop.ui.orderHistory.OrderHistoryItem;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
@@ -44,7 +45,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
     String[] items = {"Tất cả", "Chờ Duyệt", "Đang vận chuyển", "Đã giao",  "Đã hủy"};
     AutoCompleteTextView autoComplate;
     ArrayAdapter<String> adapterItems;
-    Connection connection;
+    static Connection connection;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,6 +163,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
             }
         }
     }
+
+
 
 
 
