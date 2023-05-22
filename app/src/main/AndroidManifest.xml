@@ -39,6 +39,9 @@
             android:name=".ui.giohang.CartListActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.MuaSamNgay.MuaSamNgayActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.Chart.ChartActivity"
             android:exported="false" />
         <activity
