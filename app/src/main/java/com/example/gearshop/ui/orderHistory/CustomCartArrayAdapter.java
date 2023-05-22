@@ -64,15 +64,29 @@ public class CustomCartArrayAdapter extends BaseAdapter {
         if(view == null){
         viewHolder = new ViewHolder();
             LayoutInflater inFlater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inFlater.inflate(R.layout.viewholder_cart, null);
-            viewHolder.picCart = view.findViewById(R.id.picCart);
-            viewHolder.cartItemTitleTxt = view.findViewById(R.id.cartItemTitleTxt);
-            viewHolder.priceEachItem = view.findViewById(R.id.priceEachItem);
-            viewHolder.priceTotalItem = view.findViewById(R.id.priceTotalItem);
-            viewHolder.numberItemTxt = view.findViewById(R.id.numberItemTxt);
-            viewHolder.minusCartBtn = view.findViewById(R.id.minusCartBtn);
-            viewHolder.plusCartBtn = view.findViewById(R.id.plusCartBtn);
-            view.setTag(viewHolder);
+            if (key == "order"){
+                view = inFlater.inflate(R.layout.san_pham_da_dat, null);
+                viewHolder.picCart = view.findViewById(R.id.order_picCart);
+                viewHolder.cartItemTitleTxt = view.findViewById(R.id.order_cartItemTitleTxt);
+                viewHolder.priceEachItem = view.findViewById(R.id.order_priceEachItem);
+                viewHolder.priceTotalItem = view.findViewById(R.id.order_priceTotalItem);
+                viewHolder.numberItemTxt = view.findViewById(R.id.order_numberItemTxt);
+//                viewHolder.minusCartBtn = view.findViewById(R.id.minusCartBtn);
+//                viewHolder.plusCartBtn = view.findViewById(R.id.plusCartBtn);
+                view.setTag(viewHolder);
+
+            } else{
+                view = inFlater.inflate(R.layout.viewholder_cart, null);
+                viewHolder.picCart = view.findViewById(R.id.picCart);
+                viewHolder.cartItemTitleTxt = view.findViewById(R.id.cartItemTitleTxt);
+                viewHolder.priceEachItem = view.findViewById(R.id.priceEachItem);
+                viewHolder.priceTotalItem = view.findViewById(R.id.priceTotalItem);
+                viewHolder.numberItemTxt = view.findViewById(R.id.numberItemTxt);
+                viewHolder.minusCartBtn = view.findViewById(R.id.minusCartBtn);
+                viewHolder.plusCartBtn = view.findViewById(R.id.plusCartBtn);
+                view.setTag(viewHolder);
+            }
+
         }
         else {
             viewHolder = (ViewHolder) view.getTag();
@@ -96,44 +110,47 @@ public class CustomCartArrayAdapter extends BaseAdapter {
         viewHolder.numberItemTxt.setText(String.format("%,d",item.getAmout()));
 
         ViewHolder finalViewHolder = viewHolder;
-        viewHolder.plusCartBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int slmoinhat = Integer.parseInt(finalViewHolder.numberItemTxt.getText().toString()) + 1;
-                int slhtai = CartListActivity.cartItemsList.get(position).getAmout();
-                int giaTongMoi = slmoinhat * CartListActivity.cartItemsList.get(position).getInitPrice();
-                CartListActivity.cartItemsList.get(position).setAmout(slmoinhat);
-                CartListActivity.cartItemsList.get(position).setTotalPrice(giaTongMoi);
-                finalViewHolder.priceTotalItem.setText(String.format("%,d",giaTongMoi));
-                CartListActivity.tinhTongTien(CartListActivity.cartItemsList);
-                finalViewHolder.numberItemTxt.setText(String.valueOf(slmoinhat));
-                if (key == "order"){
-                    OrderListActivity.tongTienThanhToan(CartListActivity.cartItemsList);
-
-                }
-            }
-        });
-
-        viewHolder.minusCartBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int slhtai = Integer.parseInt(finalViewHolder.numberItemTxt.getText().toString());
-                if(slhtai > 0) {
-                    slhtai -= 1;
-                    CartListActivity.cartItemsList.get(position).setAmout(slhtai);
-                    int giaTongMoi = slhtai * CartListActivity.cartItemsList.get(position).getInitPrice();
+        if (key == "cart"){
+            viewHolder.plusCartBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int slmoinhat = Integer.parseInt(finalViewHolder.numberItemTxt.getText().toString()) + 1;
+                    int slhtai = CartListActivity.cartItemsList.get(position).getAmout();
+                    int giaTongMoi = slmoinhat * CartListActivity.cartItemsList.get(position).getInitPrice();
+                    CartListActivity.cartItemsList.get(position).setAmout(slmoinhat);
                     CartListActivity.cartItemsList.get(position).setTotalPrice(giaTongMoi);
                     finalViewHolder.priceTotalItem.setText(String.format("%,d",giaTongMoi));
-                    finalViewHolder.numberItemTxt.setText(String.valueOf(slhtai));
                     CartListActivity.tinhTongTien(CartListActivity.cartItemsList);
+                    finalViewHolder.numberItemTxt.setText(String.valueOf(slmoinhat));
                     if (key == "order"){
                         OrderListActivity.tongTienThanhToan(CartListActivity.cartItemsList);
 
                     }
                 }
+            });
 
-            }
-        });
+            viewHolder.minusCartBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int slhtai = Integer.parseInt(finalViewHolder.numberItemTxt.getText().toString());
+                    if(slhtai > 0) {
+                        slhtai -= 1;
+                        CartListActivity.cartItemsList.get(position).setAmout(slhtai);
+                        int giaTongMoi = slhtai * CartListActivity.cartItemsList.get(position).getInitPrice();
+                        CartListActivity.cartItemsList.get(position).setTotalPrice(giaTongMoi);
+                        finalViewHolder.priceTotalItem.setText(String.format("%,d",giaTongMoi));
+                        finalViewHolder.numberItemTxt.setText(String.valueOf(slhtai));
+                        CartListActivity.tinhTongTien(CartListActivity.cartItemsList);
+                        if (key == "order"){
+                            OrderListActivity.tongTienThanhToan(CartListActivity.cartItemsList);
+
+                        }
+                    }
+
+                }
+            });
+        }
+
 
         return view;
     }

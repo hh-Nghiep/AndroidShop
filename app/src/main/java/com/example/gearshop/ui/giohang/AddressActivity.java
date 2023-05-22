@@ -30,7 +30,7 @@ public class AddressActivity extends AppCompatActivity {
     }
 
     private void setControl () {
-        name = findViewById(R.id.customerAddress);
+        name = findViewById(R.id.customerName);
         phoneNumber = findViewById(R.id.customerPhoneNum);
         address = findViewById(R.id.customerAddress);
         saveAddress = findViewById(R.id.saveAddress);

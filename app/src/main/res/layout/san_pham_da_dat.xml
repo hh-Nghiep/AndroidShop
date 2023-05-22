@@ -10,7 +10,7 @@
     android:layout_marginBottom="10dp">
 
     <ImageView
-        android:id="@+id/picCart"
+        android:id="@+id/order_picCart"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="4dp"
@@ -23,7 +23,7 @@
         tools:srcCompat="@drawable/pop_1" />
 
     <TextView
-        android:id="@+id/cartItemTitleTxt"
+        android:id="@+id/order_cartItemTitleTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -31,8 +31,8 @@
         android:text="title"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/picCart"
-        app:layout_constraintTop_toTopOf="@+id/picCart" />
+        app:layout_constraintStart_toEndOf="@+id/order_picCart"
+        app:layout_constraintTop_toTopOf="@+id/order_picCart" />
 
     <TextView
         android:id="@+id/textView"
@@ -42,12 +42,12 @@
         android:text="Số lượng: "
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/picCart"
+        app:layout_constraintBottom_toBottomOf="@+id/order_picCart"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/numberItemTxt"
+        android:id="@+id/order_numberItemTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1"
@@ -63,12 +63,12 @@
         android:layout_marginEnd="16dp"
         android:text="VNĐ"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/cartItemTitleTxt"
+        app:layout_constraintBottom_toBottomOf="@+id/order_cartItemTitleTxt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cartItemTitleTxt" />
+        app:layout_constraintTop_toTopOf="@+id/order_cartItemTitleTxt" />
 
     <TextView
-        android:id="@+id/priceEachItem"
+        android:id="@+id/order_priceEachItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="2dp"
@@ -90,7 +90,7 @@
         app:layout_constraintEnd_toEndOf="@+id/textView7" />
 
     <TextView
-        android:id="@+id/priceTotalItem"
+        android:id="@+id/order_priceTotalItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="2dp"

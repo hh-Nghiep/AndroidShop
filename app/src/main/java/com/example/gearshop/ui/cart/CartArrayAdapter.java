@@ -74,11 +74,11 @@ public class CartArrayAdapter extends ArrayAdapter<CartItem> {
 
         convertView = myFlater.inflate(IdLayout, null);
         CartItem item = cartItemsList.get(position);
-        ImageView cartImg = convertView.findViewById(R.id.picCart);
+        ImageView cartImg = convertView.findViewById(R.id.order_picCart);
 
-        minusCartBtn = convertView.findViewById(R.id.minusCartBtn);
-        plusCartBtn = convertView.findViewById(R.id.plusCartBtn);
-        numberItemTxt = convertView.findViewById(R.id.numberItemTxt);
+//        minusCartBtn = convertView.findViewById(R.id.minusCartBtn);
+//        plusCartBtn = convertView.findViewById(R.id.plusCartBtn);
+        numberItemTxt = convertView.findViewById(R.id.order_numberItemTxt);
 
 //        plusCartBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -106,16 +106,16 @@ public class CartArrayAdapter extends ArrayAdapter<CartItem> {
 //                .load("https://drive.google.com/uc?id=" + item.getImg().substring(32,item.getImg().lastIndexOf('/')))
 //                .into(cartImg);
 
-        TextView cartName = convertView.findViewById(R.id.cartItemTitleTxt);
+        TextView cartName = convertView.findViewById(R.id.order_cartItemTitleTxt);
         cartName.setText(item.getName());
 
-        TextView initPriceItem = convertView.findViewById(R.id.priceEachItem);
+        TextView initPriceItem = convertView.findViewById(R.id.order_priceEachItem);
         initPriceItem.setText((String.format("%,d",item.getInitPrice())));
 
-        TextView totalPriceItem = convertView.findViewById(R.id.priceTotalItem);
+        TextView totalPriceItem = convertView.findViewById(R.id.order_priceTotalItem);
         totalPriceItem.setText(String.format("%,d",item.getTotalPrice()));
 
-        TextView amout = convertView.findViewById(R.id.numberItemTxt);
+        TextView amout = convertView.findViewById(R.id.order_numberItemTxt);
         amout.setText(String.format("%,d",item.getAmout()));
 
         return convertView;

@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.gearshop.ui.banphim.BanPhimFragment;
 import com.example.gearshop.ui.chuot.ChuotFragment;
 import com.example.gearshop.ui.giohang.CartListActivity;
+import com.example.gearshop.ui.giohang.OrderHistoryActivity;
 import com.example.gearshop.ui.home.HomeFragment;
 import com.example.gearshop.ui.Quanli.ItemListActivity;
 import com.example.gearshop.ui.login_register.ui.login.InfoUser;
@@ -103,6 +104,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 replaceFragment(new InfoFragment());
                 currentFragment = FRAGMENT_THONGTINNGUOIDUNG;
             }
+        }else if (id == R.id.nav_DSDonHang) {
+            Intent intent = new Intent(this, OrderHistoryActivity.class);
+            this.startActivity(intent);
         }else if (id == R.id.nav_ThayDoiMK) {
             if(currentFragment != FRAGMENT_THAYDOIMATKHAU){
                 replaceFragment(new PasswordFragment());

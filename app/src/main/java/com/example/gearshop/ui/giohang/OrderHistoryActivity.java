@@ -7,18 +7,31 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.gearshop.ConnectSQL;
 import com.example.gearshop.MainActivity;
 import com.example.gearshop.R;
 import com.example.gearshop.ui.cart.CartItem;
+import com.example.gearshop.ui.cart.CartOfUser;
 import com.example.gearshop.ui.home.HomeFragment;
+import com.example.gearshop.ui.model.SanPham;
 import com.example.gearshop.ui.orderHistory.OrderHistoryAdapter;
 import com.example.gearshop.ui.orderHistory.OrderHistoryItem;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class OrderHistoryActivity extends AppCompatActivity {
 
@@ -28,7 +41,10 @@ public class OrderHistoryActivity extends AppCompatActivity {
     ArrayList<OrderHistoryItem> orderHistoryItemsList;
     OrderHistoryAdapter orderHistoryAdapter;
     ListView lv;
-
+    String[] items = {"Tất cả", "Chờ Duyệt", "Đang vận chuyển", "Đã giao",  "Đã hủy"};
+    AutoCompleteTextView autoComplate;
+    ArrayAdapter<String> adapterItems;
+    Connection connection;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +55,19 @@ public class OrderHistoryActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setControl();
         setEvent();
+        autoComplate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String item = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText( getApplicationContext(), item,Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void setEvent() {
+
+        adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, items);
+        autoComplate.setAdapter(adapterItems);
     }
     private ArrayList<OrderHistoryItem> createMockup () {
         orderHistoryItemsList = new ArrayList<>();
@@ -63,11 +89,11 @@ public class OrderHistoryActivity extends AppCompatActivity {
         return orderHistoryItemsList;
     }
     private void setControl() {
-
+        layDSDonhang();
         tongTientxt = findViewById(R.id.orderHistoryTotalPriceTxt);
-        orderHistoryItemsList = createMockup();
+//        orderHistoryItemsList = createMockup();
 
-
+        autoComplate = findViewById(R.id.statusSelection);
 
         lv = findViewById(R.id.OrdersHistoryActivityLv);
 
@@ -76,6 +102,70 @@ public class OrderHistoryActivity extends AppCompatActivity {
         lv.setAdapter(orderHistoryAdapter);
     }
 
+    private void layDSDonhang () {
+        orderHistoryItemsList = new ArrayList<>();
+        try {
+            ConnectSQL con = new ConnectSQL();
+            connection = con.CONN();
+            if(connection != null){
+//                String query = "select TenNguoiNhan, DiaChi, SoDienThoai, NgayTaoDH, TrangThaiDH from DonHang where maTK = '" + InfoUser.id_user + "'";
+                String query = "select MaDH, TenNguoiNhan, DiaChi, SoDienThoai, NgayTaoDH, TrangThaiDH from DonHang where maTK = '" + 3 + "'";
+                Statement statement = connection.createStatement();
+                ResultSet rs = statement.executeQuery(query);
+                while (rs.next()){
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                    Date date = sdf.parse(rs.getString(5));
+                    orderHistoryItemsList.add(new OrderHistoryItem(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), date, rs.getInt(6)));
+                }
+                Toast.makeText( getApplicationContext(), "lay danh sach don hang!",Toast.LENGTH_LONG).show();
+            }
+        }catch (Exception ex){
+            System.err.print(ex.getMessage());
+            Toast.makeText( getApplicationContext(), ex.getMessage(),Toast.LENGTH_LONG).show();
+        }
+
+        for( Integer i = 0 ; i < orderHistoryItemsList.size() ; i++){
+            try {
+                ConnectSQL con = new ConnectSQL();
+                connection = con.CONN();
+                if(connection != null){
+                    ArrayList<CartItem> list = new ArrayList<>();
+//                String query = "select TenNguoiNhan, DiaChi, SoDienThoai, NgayTaoDH, TrangThaiDH from DonHang where maTK = '" + InfoUser.id_user + "'";
+                    String query = "select HinhAnh = (select HinhAnh1 from SanPham where MaSP = ct.MaSP), TenSanPham = (select TenSP from SanPham where MaSP = ct.MaSP), DonGia = (select GiaSP from SanPham where MaSP = ct.MaSP), ct.TongTien, ct.SoLuongSP, ct.MaSP from  ChiTietDH as ct where ct.MaDH = '" + orderHistoryItemsList.get(i).getMaDH() + "'";
+                    Statement statement = connection.createStatement();
+                    ResultSet rs = statement.executeQuery(query);
+                    while (rs.next()){
+
+                        list.add(new CartItem(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6)));
+                    }
+                    orderHistoryItemsList.get(i).setDsSanPham(list);
+                    Toast.makeText( getApplicationContext(), "lay chi tiet danh sach don hang!",Toast.LENGTH_LONG).show();
+                }
+            }catch (Exception ex){
+                System.err.print(ex.getMessage());
+                Toast.makeText( getApplicationContext(), ex.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+
+//    private void xemChiTietDonHang () {
+//        ArrayList<CartItem> cartItemsList = new ArrayList<>();
+//        try {
+//            ConnectSQL con = new ConnectSQL();
+//            connection = con.CONN();
+//            if(connection != null){
+//                String query = "select sp.HinhAnh1, sp.TenSP, sp.GiaSP, ct.SoLuongSP from ChiTietDH ct left join SanPham sp on sp.MaSP = ct.MaSP where MaDH='"+ maDH +"'";
+//                Statement statement = connection.createStatement();
+//                ResultSet rs = statement.executeQuery(query);
+//                while (rs.next()){
+//                    cartItemsList.add(new CartItem(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(3) * rs.getInt(4), rs.getInt(4)));
+//                }
+//            }
+//        }catch (Exception ex){
+//            System.err.print(ex.getMessage());
+//        }
+//    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

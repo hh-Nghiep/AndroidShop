@@ -21,7 +21,7 @@ public class OrderHistoryAdapter extends ArrayAdapter<OrderHistoryItem> {
     Activity context;
     int idLayout;
     ArrayList<OrderHistoryItem> orderHistoryItemsList;
-    CartArrayAdapter cartArrayAdapter;
+    CustomCartArrayAdapter cartArrayAdapter;
     ListView orderHistoryLv;
     public OrderHistoryAdapter(Activity context, int idLayout, ArrayList<OrderHistoryItem> orderHistoryItemsList) {
         super(context, idLayout, orderHistoryItemsList);
@@ -55,7 +55,7 @@ public class OrderHistoryAdapter extends ArrayAdapter<OrderHistoryItem> {
         }
         totalPrice.setText(String.format("%,d",total));
 
-        cartArrayAdapter = new CartArrayAdapter(context, R.layout.san_pham_da_dat, dsSanPham);
+        cartArrayAdapter = new CustomCartArrayAdapter(context, dsSanPham, "order");
 
         orderHistoryLv.setAdapter(cartArrayAdapter);
 

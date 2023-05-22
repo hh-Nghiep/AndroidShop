@@ -13,13 +13,22 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.gearshop.ConnectSQL;
 import com.example.gearshop.R;
 import com.example.gearshop.ui.cart.CartArrayAdapter;
 import com.example.gearshop.ui.cart.CartItem;
 import com.example.gearshop.ui.cart.CartOfUser;
+import com.example.gearshop.ui.login_register.ui.login.InfoUser;
 import com.example.gearshop.ui.orderHistory.CustomCartArrayAdapter;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import android.util.Log;
+import android.widget.Toast;
 
 public class OrderListActivity extends AppCompatActivity {
     Button btnDatHang;
@@ -32,6 +41,7 @@ public class OrderListActivity extends AppCompatActivity {
     CustomCartArrayAdapter cartArrayAdapter;
     ListView lv;
     ImageButton addressBtn;
+    Connection connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +58,7 @@ public class OrderListActivity extends AppCompatActivity {
         btnDatHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                taoDonHang();
                 Intent intent = new Intent(OrderListActivity.this, OrderHistoryActivity.class);
                 OrderListActivity.this.startActivity(intent);
             }
@@ -60,16 +71,7 @@ public class OrderListActivity extends AppCompatActivity {
             }
         });
     }
-    private ArrayList<CartItem> createMockup () {
-        cartItemsList = new ArrayList<>();
-        String img1 = "https://drive.google.com/file/d/1zM6-e3FuDZGeQbCCjcarb1wJ65_Dki8A/view?usp=sharing";
-        String img2 = "https://drive.google.com/file/d/1njPEQmMEGokZ0gJUN3VYFtNEgr5RviLD/view?usp=share_link";
 
-        cartItemsList.add(new CartItem(img1, "sản phẩm 1", 123, 2123, 1, 1));
-        cartItemsList.add(new CartItem(img2, "sản phẩm 2", 1223, 21323, 12, 2));
-
-        return cartItemsList;
-    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -89,10 +91,10 @@ public class OrderListActivity extends AppCompatActivity {
         shipPriceTxt= findViewById(R.id.shipPriceTxt);
         totalPriceTxt = findViewById(R.id.orderHistoryTotalPriceTxt);
 
-        tongTienThanhToan(CartListActivity.cartItemsList);
+        tongTienThanhToan(CartOfUser.globalCart);
 
         lv = findViewById(R.id.orderLv);
-        cartItemsList = createMockup();
+
         if(CartOfUser.customerAddress != null) {
             System.out.println("CartOfUser.customerAddress.getAddress() " + CartOfUser.customerAddress.getAddress() );
 
@@ -101,12 +103,86 @@ public class OrderListActivity extends AppCompatActivity {
         }
 
 
-        cartArrayAdapter = new CustomCartArrayAdapter(OrderListActivity.this,  CartListActivity.cartItemsList, "order");
+        cartArrayAdapter = new CustomCartArrayAdapter(OrderListActivity.this,  CartOfUser.globalCart, "order");
 
 
         lv.setAdapter(cartArrayAdapter);
     }
+    private void taoDonHang () {
+        try {
+            ConnectSQL con = new ConnectSQL();
+            connection = con.CONN();
+            if(connection != null){
+                long millis=System.currentTimeMillis();
+                String sql ="INSERT INTO DonHang values (?,?,?,?,?,?)";
+                try {
+                    java.sql.Date date = new java.sql.Date(millis);
+                    PreparedStatement ps = connection.prepareStatement(sql);
+//                    ps.setInt(1, InfoUser.id_user);
+                    ps.setInt(1, 3);
+                    ps.setDate(2, date);
+                    ps.setInt(3, 0);
+                    ps.setString(4, CartOfUser.customerAddress.getName());
+                    ps.setString(5, CartOfUser.customerAddress.getAddress());
+                    ps.setString(6, CartOfUser.customerAddress.getPhoneNumber());
+                    ps.executeUpdate();
+                    ps.close();
+                    connection.close();
+                } catch (SQLException ex) {
+                    Log.d("err", ex.getMessage());
+                    Toast.makeText( getApplicationContext(), ex.getMessage(),Toast.LENGTH_LONG).show();
+                }
+            }
+        }catch (Exception ex){
+            Log.d("err", ex.getMessage());
+        }
 
+        Integer maDH = 0;
+        try {
+            ConnectSQL con = new ConnectSQL();
+            connection = con.CONN();
+            if(connection != null){
+//                String query = "select max(maDH) from DonHang where maTK = '" + InfoUser.id_user + "'";
+                String query = "select max(maDH) from DonHang where maTK = '" + 3 + "'";
+                Statement statement = connection.createStatement();
+                ResultSet rs = statement.executeQuery(query);
+                while (rs.next()){
+                    maDH = rs.getInt(1);
+                }
+            }
+        }catch (Exception ex){
+            System.err.print(ex.getMessage());
+        }
+        for( Integer i = 0 ; i < CartOfUser.globalCart.size() ; i++){
+            try {
+                ConnectSQL con = new ConnectSQL();
+                connection = con.CONN();
+                if(connection != null){
+                    long millis=System.currentTimeMillis();
+                    String sql ="INSERT INTO ChiTietDH values (?,?,?,?)";
+                    try {
+                        java.sql.Date date = new java.sql.Date(millis);
+                        PreparedStatement ps = connection.prepareStatement(sql);
+                        ps.setInt(1, maDH);
+                        ps.setInt(2, CartOfUser.globalCart.get(i).getId());
+                        ps.setInt(3, CartOfUser.globalCart.get(i).getAmout());
+                        ps.setInt(4, CartOfUser.globalCart.get(i).getTotalPrice());
+                        ps.executeUpdate();
+                        ps.close();
+                        connection.close();
+
+                        Toast.makeText( getApplicationContext(), "Đặt hàng thành công!",Toast.LENGTH_LONG).show();
+
+                    } catch (SQLException ex) {
+                        Log.d("err", ex.getMessage());
+                    }
+                }
+            }catch (Exception ex){
+                Log.d("err", ex.getMessage());
+            }
+        }
+
+    }
     public static void tongTienThanhToan (ArrayList<CartItem> cartItemsList) {
         int total = 0;
         for (int i = 0; i < cartItemsList.size(); i++) {
