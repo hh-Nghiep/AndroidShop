@@ -36,7 +36,7 @@ import java.util.Date;
 public class OrderHistoryActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-    Button btnThanhToanHoaDon;
+    Button  btnChiTietDonHang;
     TextView tongTientxt;
     ArrayList<OrderHistoryItem> orderHistoryItemsList;
     OrderHistoryAdapter orderHistoryAdapter;
@@ -94,6 +94,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
         adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, items);
         autoComplate.setAdapter(adapterItems);
+
     }
 
     private void setControl() {
@@ -163,23 +164,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
     }
 
 
-//    private void xemChiTietDonHang () {
-//        ArrayList<CartItem> cartItemsList = new ArrayList<>();
-//        try {
-//            ConnectSQL con = new ConnectSQL();
-//            connection = con.CONN();
-//            if(connection != null){
-//                String query = "select sp.HinhAnh1, sp.TenSP, sp.GiaSP, ct.SoLuongSP from ChiTietDH ct left join SanPham sp on sp.MaSP = ct.MaSP where MaDH='"+ maDH +"'";
-//                Statement statement = connection.createStatement();
-//                ResultSet rs = statement.executeQuery(query);
-//                while (rs.next()){
-//                    cartItemsList.add(new CartItem(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(3) * rs.getInt(4), rs.getInt(4)));
-//                }
-//            }
-//        }catch (Exception ex){
-//            System.err.print(ex.getMessage());
-//        }
-//    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

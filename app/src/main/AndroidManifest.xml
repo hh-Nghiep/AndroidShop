@@ -15,6 +15,9 @@
         android:theme="@style/Theme.GearShop"
         tools:targetApi="31">
         <activity
+            android:name=".ui.giohang.DetailOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.giohang.AddressActivity"
             android:exported="false" />
         <activity

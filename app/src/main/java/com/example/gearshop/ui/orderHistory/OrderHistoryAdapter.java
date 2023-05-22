@@ -1,12 +1,16 @@
 package com.example.gearshop.ui.orderHistory;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +18,7 @@ import androidx.annotation.Nullable;
 import com.example.gearshop.R;
 import com.example.gearshop.ui.cart.CartArrayAdapter;
 import com.example.gearshop.ui.cart.CartItem;
+import com.example.gearshop.ui.giohang.DetailOrderActivity;
 
 import java.util.ArrayList;
 
@@ -23,6 +28,8 @@ public class OrderHistoryAdapter extends ArrayAdapter<OrderHistoryItem> {
     ArrayList<OrderHistoryItem> orderHistoryItemsList;
     CustomCartArrayAdapter cartArrayAdapter;
     ListView orderHistoryLv;
+    TextView statusValueTxt, statusMessageTxt;
+    Button btnCapNhatTrangThai, btnChiTietDonHang;
     public OrderHistoryAdapter(Activity context, int idLayout, ArrayList<OrderHistoryItem> orderHistoryItemsList) {
         super(context, idLayout, orderHistoryItemsList);
         this.context = context;
@@ -35,18 +42,54 @@ public class OrderHistoryAdapter extends ArrayAdapter<OrderHistoryItem> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater myFlater = context.getLayoutInflater();
 
-        for(int j = 0; j< orderHistoryItemsList.size(); j++) {
-
-
-        }
-
-
         convertView = myFlater.inflate(idLayout, null);
         OrderHistoryItem item = orderHistoryItemsList.get(position);
         TextView totalPrice = convertView.findViewById(R.id.orderHistoryTotalPriceTxt);
-
+        statusValueTxt= convertView.findViewById(R.id.statusValueTxt);
+        statusMessageTxt= convertView.findViewById(R.id.statusMessageTxt);
+        btnCapNhatTrangThai = convertView.findViewById(R.id.btnCapNhatTrangThai);
+        switch (item.getTrangThai()) {
+            case 0: {
+                statusValueTxt.setText("Chờ Duyệt");
+                statusMessageTxt.setText("Đơn hàng đang được xét duyệt");
+                btnCapNhatTrangThai.setText("Hủy đơn");
+                break;
+            }
+            case 1: {
+                int red = 76;
+                int green = 107;
+                int blue = 229;
+                int color = Color.rgb(red, green, blue);
+                statusValueTxt.setText("Đang vận chuyển");
+                statusMessageTxt.setText("Đơn hàng đang được vận chuyển");
+                btnCapNhatTrangThai.setText("Đã nhận hàng");
+                statusValueTxt.setTextColor(color);
+                break;
+            }
+            case 2: {
+                int red = 75;
+                int green = 236;
+                int blue = 102;
+                int color = Color.rgb(red, green, blue);
+                statusValueTxt.setText("Đã giao");
+                statusMessageTxt.setText("Đơn hàng đã được giao");
+                btnCapNhatTrangThai.setVisibility(View.INVISIBLE);
+                statusValueTxt.setTextColor(color);
+                break;
+            }
+            case 3: {
+                int red = 208;
+                int green = 31;
+                int blue = 31;
+                int color = Color.rgb(red, green, blue);
+                statusValueTxt.setText("Đã Hủy");
+                statusMessageTxt.setText("Đơn hàng đã bị hủy");
+                btnCapNhatTrangThai.setVisibility(View.INVISIBLE);
+                statusValueTxt.setTextColor(color);
+                break;
+            }
+        }
         ArrayList <CartItem> dsSanPham = item.getDsSanPham();
-        System.out.println("item "+ item);
         orderHistoryLv = convertView.findViewById(R.id.OrderHistoryLv);
 
         int total = 0;
@@ -58,7 +101,15 @@ public class OrderHistoryAdapter extends ArrayAdapter<OrderHistoryItem> {
         cartArrayAdapter = new CustomCartArrayAdapter(context, dsSanPham, "order");
 
         orderHistoryLv.setAdapter(cartArrayAdapter);
-
+        btnChiTietDonHang = convertView.findViewById(R.id.btnChiTietDonHang);
+        btnChiTietDonHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DetailOrderActivity.xemChiTietDonHang(item.getMaDH());
+                Intent intent = new Intent(context, DetailOrderActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
         return convertView;
     }
