@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
     String EMAIL_REGEX =   "\\b[A-Z0-9._%-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b";
-    String PHONE_REGEX =   "^[0-9._-]{12}$";
+    String PHONE_REGEX =   "^[0-9._-]{10}$";
     String CMND_REGEX =   "^[0-9._-]{9}$";
     String CCCD_REGEX =   "^[0-9._-]{12}$";
     Toolbar toolbar;
@@ -128,12 +128,12 @@ public class RegisterActivity extends AppCompatActivity {
                                 String sql ="INSERT INTO TaiKhoan values (?,?,?,?,?,?,?) ";
                                 try {
                                     PreparedStatement ps = connection.prepareStatement(sql);
-                                    ps.setString(1, email);
-                                    ps.setString(2, matKhau);
-                                    ps.setString(3, tenNguoiDung);
-                                    ps.setString(4, SDT);
-                                    ps.setString(5, CMND);
-                                    ps.setString(6, diaChi);
+                                    ps.setString(1, email.trim());
+                                    ps.setString(2, matKhau.trim());
+                                    ps.setString(3, tenNguoiDung.trim());
+                                    ps.setString(4, SDT.trim());
+                                    ps.setString(5, CMND.trim());
+                                    ps.setString(6, diaChi.trim());
                                     ps.setString(7, "1");
                                     ps.executeUpdate();
                                     ps.close();

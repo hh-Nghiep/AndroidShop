@@ -44,7 +44,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/baseline_person_24"
-                android:text="Nguyễn Văn A"
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
@@ -53,7 +52,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/baseline_email_24"
-                android:text="nva@gmail.com"
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
@@ -62,7 +60,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/baseline_person_pin_24"
-                android:text="364095347"
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
@@ -71,7 +68,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/baseline_local_phone_24"
-                android:text="0973123431"
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
@@ -81,9 +77,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/baseline_home_24"
-                android:text="Khu phố 1, Man THiện"
                 android:textAlignment="center"
                 android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tvThongBaoInfo"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <Button
                 android:id="@+id/btnLuuThongTinNguoiDung"
