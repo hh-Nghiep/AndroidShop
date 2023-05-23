@@ -95,12 +95,11 @@ public class OrderListActivity extends AppCompatActivity {
 
         lv = findViewById(R.id.orderLv);
 
-        if(CartOfUser.customerAddress != null) {
-            System.out.println("CartOfUser.customerAddress.getAddress() " + CartOfUser.customerAddress.getAddress() );
 
-            addressTxt.setText(CartOfUser.customerAddress.getAddress().toString());
 
-        }
+            addressTxt.setText(CartOfUser.customerAddress.getAddress());
+
+
 
 
         cartArrayAdapter = new CustomCartArrayAdapter(OrderListActivity.this,  CartOfUser.globalCart, "order");

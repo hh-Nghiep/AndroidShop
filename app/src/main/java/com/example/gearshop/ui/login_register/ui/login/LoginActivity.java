@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.example.gearshop.ConnectSQL;
 import com.example.gearshop.MainActivity;
 import com.example.gearshop.R;
+import com.example.gearshop.ui.cart.CartOfUser;
+import com.example.gearshop.ui.cart.CustomerAddress;
 import com.example.gearshop.ui.model.SanPham;
 
 import org.w3c.dom.Text;
@@ -73,6 +75,10 @@ public class LoginActivity extends AppCompatActivity {
                     if(!flag){
                         Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không hợp lệ !!!",Toast.LENGTH_LONG).show();
                     }
+                    CustomerAddress customer = new CustomerAddress(InfoUser.name_user, InfoUser.SDT_user, InfoUser.DiaChi_user);
+                    CartOfUser.customerAddress = customer;
+
+
                 }catch (Exception ex){
                     System.err.print(ex.getMessage());
                 }
