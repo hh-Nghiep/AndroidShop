@@ -135,7 +135,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
                     Date date = sdf.parse(rs.getString(5));
                     orderHistoryItemsList.add(new OrderHistoryItem(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), date, rs.getInt(6)));
                 }
-                Toast.makeText( getApplicationContext(), "lay danh sach don hang!",Toast.LENGTH_LONG).show();
             }
         }catch (Exception ex){
             System.err.print(ex.getMessage());
@@ -157,7 +156,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
                         list.add(new CartItem(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6)));
                     }
                     orderHistoryItemsList.get(i).setDsSanPham(list);
-                    Toast.makeText( getApplicationContext(), "lay chi tiet danh sach don hang!",Toast.LENGTH_LONG).show();
                 }
             }catch (Exception ex){
                 System.err.print(ex.getMessage());

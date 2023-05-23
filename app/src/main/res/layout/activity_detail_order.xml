@@ -156,7 +156,18 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
-
+            <Button
+                android:id="@+id/backHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/blue_button"
+                android:text="Quay lại"
+                android:layout_gravity="center"
+                android:textColor="#ffff"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                />
         </LinearLayout>
     </ScrollView>
 

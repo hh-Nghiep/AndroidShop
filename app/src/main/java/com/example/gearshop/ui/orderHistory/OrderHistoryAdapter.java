@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.gearshop.ConnectSQL;
+import com.example.gearshop.MainActivity;
 import com.example.gearshop.R;
 import com.example.gearshop.ui.cart.CartArrayAdapter;
 import com.example.gearshop.ui.cart.CartItem;
@@ -35,7 +36,7 @@ public class OrderHistoryAdapter extends ArrayAdapter<OrderHistoryItem> {
     CustomCartArrayAdapter cartArrayAdapter;
     ListView orderHistoryLv;
     TextView statusValueTxt, statusMessageTxt;
-    Button btnCapNhatTrangThai, btnChiTietDonHang;
+    Button btnCapNhatTrangThai, btnChiTietDonHang, btnbackHome;
     Connection connection;
     public OrderHistoryAdapter(Activity context, int idLayout, ArrayList<OrderHistoryItem> orderHistoryItemsList) {
         super(context, idLayout, orderHistoryItemsList);
@@ -55,6 +56,7 @@ public class OrderHistoryAdapter extends ArrayAdapter<OrderHistoryItem> {
         statusValueTxt= convertView.findViewById(R.id.statusValueTxt);
         statusMessageTxt= convertView.findViewById(R.id.statusMessageTxt);
         btnCapNhatTrangThai = convertView.findViewById(R.id.btnCapNhatTrangThai);
+        btnbackHome = convertView.findViewById(R.id.backHome);
         switch (item.getTrangThai()) {
             case 0: {
                 statusValueTxt.setText("Chờ Duyệt");

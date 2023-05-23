@@ -3,6 +3,7 @@ package com.example.gearshop.ui.giohang;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gearshop.ConnectSQL;
+import com.example.gearshop.MainActivity;
 import com.example.gearshop.R;
 import com.example.gearshop.ui.cart.CartItem;
 import com.example.gearshop.ui.cart.CartOfUser;
@@ -26,7 +28,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class DetailOrderActivity extends AppCompatActivity {
-    Button btnDatHang;
+    Button btnDatHang, btnbackHome;
     Toolbar toolbar;
     TextView orderNameValueTxt, orderPhoneValueTxt, detailAddressTxt, orderDetailTotalPriceTxt, detailStatusTxt;
     static ArrayList<CartItem> cartItemsList;
@@ -54,7 +56,7 @@ public class DetailOrderActivity extends AppCompatActivity {
         detailAddressTxt = findViewById(R.id.detailAddressTxt);
         orderDetailTotalPriceTxt = findViewById(R.id.orderDetailTotalPriceTxt);
         detailStatusTxt = findViewById(R.id.detailStatusTxt);
-
+        btnbackHome = findViewById(R.id.backHome);
         orderNameValueTxt.setText(customerAddress.getName());
         orderPhoneValueTxt.setText(customerAddress.getPhoneNumber());
         detailAddressTxt.setText(customerAddress.getAddress());
@@ -111,6 +113,13 @@ public class DetailOrderActivity extends AppCompatActivity {
     }
 
     private void setEvent() {
+        btnbackHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailOrderActivity.this, OrderHistoryActivity.class);
+                DetailOrderActivity.this.startActivity(intent);
+            }
+        });
 
     }
 
